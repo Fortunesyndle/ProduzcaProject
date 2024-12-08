@@ -16,18 +16,12 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import raven.application.Application;
-import raven.form.Dashboard;
 import raven.application.form.other.FormInbox;
 import raven.application.form.other.FormRead;
-import raven.form.Entrada;
-import raven.form.P_Pasantias;
-import raven.form.P_Tesis;
-import raven.form.Pasantias;
-import raven.form.Prestamos;
-import raven.form.Tesis;
+import raven.form.*;
 import raven.menu.Menu;
 import raven.menu.MenuAction;
-import raven.form.Salida;
+
 
 /**
  *
@@ -84,22 +78,30 @@ public class MainForm extends JLayeredPane {
                     Application.showForm(new Entrada());
                 } else if (subIndex == 2) {
                     Application.showForm(new Salida());
-                }else if (subIndex == 3) {
-                    Application.showForm(new Pasantias());
                 } else {
                     action.cancel();
                 }
             } else if (index == 2) {
+                if (subIndex == 1) {
+                    Application.showForm(new ReportesEntradas());
+                } else if (subIndex == 2) {
+                    Application.showForm(new ReportesSalidas());
+                } else {
+                    action.cancel();
+                }
                     
             } else if (index == 3) {
-                    Application.showForm(new P_Tesis());
+                    Application.showForm(new Observaciones());
             } else if (index == 4) {
-                    Application.showForm(new P_Pasantias());
+                    if (subIndex == 1) {
+                    Application.showForm(new RegistroEmpleados());
+                } else if (subIndex == 2) {
+                    Application.showForm(new ListaEmpleados());
+                } else {
+                    action.cancel();
+                }
             } else if (index == 5) {
-                    Application.logout();
-            } else if (index == 6) {
-                    
-                
+                    Application.logout();    
             } else {
                 action.cancel();
             }
