@@ -125,7 +125,7 @@ public class Dashboard extends javax.swing.JPanel {
         pieChart2 = new javaswingdev.chart.PieChart();
         pieChart3 = new javaswingdev.chart.PieChart();
 
-        lb.setText("Bienvenida de nuevo, Astrid Hernández");
+        lb.setText("Bienvenido de nuevo Admin");
 
         labelMensaje.setText("jLabel1");
 
@@ -179,16 +179,14 @@ public class Dashboard extends javax.swing.JPanel {
                             .addComponent(card2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lb))
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(card3, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(361, 361, 361)
-                        .addComponent(lb))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(555, 555, 555)
                         .addComponent(labelMensaje)))
@@ -205,9 +203,9 @@ public class Dashboard extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(lb)
                 .addGap(35, 35, 35)
+                .addComponent(lb)
+                .addGap(32, 32, 32)
                 .addComponent(labelMensaje)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

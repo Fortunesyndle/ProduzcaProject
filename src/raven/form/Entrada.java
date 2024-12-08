@@ -1,5 +1,6 @@
 package raven.form;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import com.raven.model.Model_Card;
 
 import com.raven.swing.ScrollBar;
@@ -29,6 +30,8 @@ public class Entrada extends javax.swing.JPanel {
 
     public Entrada() {
         initComponents();
+        lb.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font");
     
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
@@ -59,7 +62,6 @@ public class Entrada extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         panel = new javax.swing.JLayeredPane();
         panel1 = new javax.swing.JLayeredPane();
@@ -80,6 +82,7 @@ public class Entrada extends javax.swing.JPanel {
         observacionestxt = new javax.swing.JTextField();
         entradabtn = new javax.swing.JButton();
         ingresarCedula = new javax.swing.JTextField();
+        lb = new javax.swing.JLabel();
 
         panel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
@@ -100,20 +103,6 @@ public class Entrada extends javax.swing.JPanel {
         idlbl.setText("ID-Entrada");
 
         observacioneslbl.setText("Observaciones");
-
-        nombretxt.setText("jTextField1");
-
-        apellidostxt.setText("jTextField2");
-
-        cedulatxt.setText("jTextField3");
-
-        jornadatxt.setText("jTextField4");
-
-        entradatxt.setText("jTextField5");
-
-        idtxt.setText("jTextField6");
-
-        observacionestxt.setText("jTextField7");
 
         entradabtn.setText("Aceptar");
 
@@ -202,20 +191,27 @@ public class Entrada extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        lb.setText("Entrada");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 1110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(170, 170, 170))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 1110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(504, 504, 504)
+                        .addComponent(lb)))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +220,9 @@ public class Entrada extends javax.swing.JPanel {
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
+                .addGap(24, 24, 24)
+                .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -245,6 +243,7 @@ public class Entrada extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jornadalbl;
     private javax.swing.JTextField jornadatxt;
+    private javax.swing.JLabel lb;
     private javax.swing.JLabel nombrelbl;
     private javax.swing.JTextField nombretxt;
     private javax.swing.JLabel observacioneslbl;

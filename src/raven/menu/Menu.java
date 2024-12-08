@@ -32,7 +32,8 @@ public class Menu extends JPanel {
             {"~Reportes~"},
             {"Ver","Entradas", "Salidas"},
             {"Observaciones"},
-            {"Empleados"},
+            {"~Personal~"},
+            {"Empleados","Registro","Listado"},
             {"Salir"}
     };
 

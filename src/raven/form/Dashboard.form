@@ -38,6 +38,7 @@
                               <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" pref="255" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="lb" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -47,10 +48,6 @@
                               <Component id="jLabel3" min="-2" pref="265" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="361" max="-2" attributes="0"/>
-                      <Component id="lb" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="555" max="-2" attributes="0"/>
@@ -73,9 +70,9 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Component id="lb" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <Component id="lb" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="labelMensaje" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -109,7 +106,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lb">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Bienvenida de nuevo, Astrid Hern&#xe1;ndez"/>
+        <Property name="text" type="java.lang.String" value="Bienvenido de nuevo Admin"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelMensaje">

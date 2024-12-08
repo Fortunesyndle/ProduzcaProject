@@ -25,9 +25,9 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import raven.conexion.Conexion;
 
-public class Observaciones extends javax.swing.JPanel {
+public class ReportesEntradas extends javax.swing.JPanel {
 
-    public Observaciones() {
+    public ReportesEntradas() {
         initComponents();
         //  add row table
         spTable.setVerticalScrollBar(new ScrollBar());
@@ -39,7 +39,6 @@ public class Observaciones extends javax.swing.JPanel {
         mostrarTabla();
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
-        
         
         busqueda_field.addActionListener(e -> buscarDatos(busqueda_field.getText()));
         
@@ -502,7 +501,7 @@ public class Observaciones extends javax.swing.JPanel {
             }
         });
 
-        lb.setText("Observaciones");
+        lb.setText("Reporte de entradas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -517,12 +516,12 @@ public class Observaciones extends javax.swing.JPanel {
                         .addGap(45, 45, 45)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(362, 362, 362)
-                        .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(350, 350, 350)
+                        .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(481, 481, 481)
+                        .addGap(476, 476, 476)
                         .addComponent(lb)))
-                .addGap(0, 379, Short.MAX_VALUE))
+                .addGap(0, 356, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(20, 20, 20)
@@ -539,13 +538,13 @@ public class Observaciones extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lb)
-                .addGap(25, 25, 25)
+                .addGap(33, 33, 33)
                 .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(401, Short.MAX_VALUE))
+                .addContainerGap(395, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()

@@ -512,10 +512,7 @@ public class P_libros extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1456, 0, -1, -1));
 
         panelBorder3.setBackground(new java.awt.Color(20, 33, 100));
 
@@ -607,8 +604,6 @@ public class P_libros extends javax.swing.JPanel {
                 .addGap(109, 109, 109))
         );
 
-        add(panelBorder3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 810, 200));
-
         panel.setBackground(new java.awt.Color(20, 33, 100));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -647,8 +642,6 @@ public class P_libros extends javax.swing.JPanel {
                 .addComponent(idLibroField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(66, Short.MAX_VALUE))
         );
-
-        add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 310, -1));
 
         panelBorder5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -709,7 +702,7 @@ public class P_libros extends javax.swing.JPanel {
                     .addGroup(panelBorder5Layout.createSequentialGroup()
                         .addGap(156, 156, 156)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(97, 97, 97))
                     .addGroup(panelBorder5Layout.createSequentialGroup()
@@ -770,8 +763,6 @@ public class P_libros extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(panelBorder5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 1140, 396));
-
         panel1.setBackground(new java.awt.Color(255, 204, 102));
 
         jLabel19.setBackground(new java.awt.Color(255, 255, 255));
@@ -785,7 +776,7 @@ public class P_libros extends javax.swing.JPanel {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel19)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1120, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -795,7 +786,38 @@ public class P_libros extends javax.swing.JPanel {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 1140, 50));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(1456, 1456, 1456)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(panelBorder3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(panelBorder5, javax.swing.GroupLayout.PREFERRED_SIZE, 1140, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelBorder3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(panelBorder5, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cedula_solActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedula_solActionPerformed

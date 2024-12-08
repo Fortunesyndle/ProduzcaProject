@@ -1,5 +1,6 @@
 package raven.form;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import com.raven.model.Model_Card;
 
 import com.raven.swing.ScrollBar;
@@ -32,6 +33,8 @@ public class Salida extends javax.swing.JPanel {
     
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
+        lb.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font");
        
     }
    
@@ -79,6 +82,7 @@ public class Salida extends javax.swing.JPanel {
         observacionestxt = new javax.swing.JTextField();
         salidabtn = new javax.swing.JButton();
         ingresarCedula = new javax.swing.JTextField();
+        lb = new javax.swing.JLabel();
 
         panel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
@@ -100,19 +104,11 @@ public class Salida extends javax.swing.JPanel {
 
         observacioneslbl.setText("Observaciones");
 
-        nombretxt.setText("jTextField1");
-
-        apellidostxt.setText("jTextField2");
-
-        cedulatxt.setText("jTextField3");
-
-        jornadatxt.setText("jTextField4");
-
-        salidatxt.setText("jTextField5");
-
-        idtxt.setText("jTextField6");
-
-        observacionestxt.setText("jTextField7");
+        idtxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idtxtActionPerformed(evt);
+            }
+        });
 
         salidabtn.setText("Aceptar");
 
@@ -159,8 +155,8 @@ public class Salida extends javax.swing.JPanel {
                         .addGap(343, 343, 343)
                         .addComponent(salidabtn))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(319, 319, 319)
-                        .addComponent(ingresarCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(315, 315, 315)
+                        .addComponent(ingresarCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -201,33 +197,46 @@ public class Salida extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        lb.setText("Salidas");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 1110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(170, 170, 170))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 1110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(513, 513, 513)
+                        .addComponent(lb)))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(21, 21, 21)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
+                .addGap(18, 18, 18)
+                .addComponent(lb)
+                .addGap(33, 33, 33)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void idtxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idtxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idtxtActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -241,6 +250,7 @@ public class Salida extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jornadalbl;
     private javax.swing.JTextField jornadatxt;
+    private javax.swing.JLabel lb;
     private javax.swing.JLabel nombrelbl;
     private javax.swing.JTextField nombretxt;
     private javax.swing.JLabel observacioneslbl;

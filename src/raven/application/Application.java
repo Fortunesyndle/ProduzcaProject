@@ -13,7 +13,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import raven.application.form.LoginForm;
 import raven.application.form.MainForm;
-import raven.form.ConsultasForm;
+
 import raven.toast.Notifications;
 
 /**
@@ -25,7 +25,7 @@ public class Application extends javax.swing.JFrame {
     private static Application app;
     private final MainForm mainForm;
     private final LoginForm loginForm;
-    private final ConsultasForm consultasForm;
+    
 
     public Application() {
         initComponents();
@@ -33,7 +33,7 @@ public class Application extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         mainForm = new MainForm();
         loginForm = new LoginForm();
-        consultasForm = new ConsultasForm();
+       
         setContentPane(loginForm);
         getRootPane().putClientProperty(FlatClientProperties.FULL_WINDOW_CONTENT, true);
         Notifications.getInstance().setJFrame(this);
@@ -54,14 +54,6 @@ public class Application extends javax.swing.JFrame {
         FlatAnimatedLafChange.hideSnapshotWithAnimation();
     }
     
-    public static void consultas() {
-        FlatAnimatedLafChange.showSnapshot();
-        app.setContentPane(app.consultasForm);
-        app.consultasForm.applyComponentOrientation(app.getComponentOrientation());
-        setSelectedMenu(0, 0);
-        SwingUtilities.updateComponentTreeUI(app.mainForm);
-        FlatAnimatedLafChange.hideSnapshotWithAnimation();
-    }
     
     public static void logout() {
         FlatAnimatedLafChange.showSnapshot();

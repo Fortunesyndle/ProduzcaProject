@@ -18,12 +18,12 @@ import raven.conexion.Conexion;
  *
  * @author User
  */
-public class P_Tesis extends javax.swing.JPanel {
+public class RegistroEmpleados extends javax.swing.JPanel {
 
     /**
      * Creates new form P_Tesis
      */
-    public P_Tesis() {
+    public RegistroEmpleados() {
         initComponents();
         
         
