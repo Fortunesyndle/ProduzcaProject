@@ -29,17 +29,17 @@ public class RegistroEmpleados extends javax.swing.JPanel {
         
         cedulaField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
-         nombreField.putClientProperty(FlatClientProperties.STYLE, ""
+         nombresField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
-         apellidoField.putClientProperty(FlatClientProperties.STYLE, ""
+         apellidosField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
-         horarioField.putClientProperty(FlatClientProperties.STYLE, ""
+         turnoField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
          edadField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
          direccionField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
-         horarioField.putClientProperty(FlatClientProperties.STYLE, ""
+         turnoField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
          panel1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
@@ -50,19 +50,87 @@ public class RegistroEmpleados extends javax.swing.JPanel {
                 + "arc:30;");
          panel.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
-         nombre_sol2.putClientProperty(FlatClientProperties.STYLE, ""
+         telefonoField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
-         cedula_sol8.putClientProperty(FlatClientProperties.STYLE, ""
+         cargoField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
-         carrera_sol2.putClientProperty(FlatClientProperties.STYLE, ""
+         emailField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
-         telefono_sol4.putClientProperty(FlatClientProperties.STYLE, ""
+         trabajoField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
-         generoLabel.putClientProperty(FlatClientProperties.STYLE, ""
+         generoField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
          jButton3.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
          
+    }
+    
+    
+    private void registrarEmpleado() {
+        String cedula = cedulaField.getText().trim();
+        String nombres = nombresField.getText().trim();
+        String apellidos = apellidosField.getText().trim();
+        String edad = edadField.getText().trim();
+        String genero = generoField.getText().trim();
+        String direccion = direccionField.getText().trim();
+        String turno = turnoField.getText().trim();
+        String telefono = telefonoField.getText().trim();
+        String email = emailField.getText().trim();
+        String cargo = cargoField.getText().trim();
+        String horario = turnoField.getText().trim();
+
+        // Validar que todos los campos estén llenos
+        if (cedula.isEmpty() || nombres.isEmpty() || apellidos.isEmpty() || edad.isEmpty() || genero.isEmpty() || direccion.isEmpty() ||
+            turno.isEmpty() || telefono.isEmpty() || email.isEmpty() || cargo.isEmpty() || horario.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, llena todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Conectar a la base de datos y registrar el empleado
+        Connection conexion = null;
+        PreparedStatement ps = null;
+
+        try {
+            conexion = new Conexion().conectar(); // Asegúrate de que este método esté bien definido
+            String sql = "INSERT INTO empleados (Cedula, Nombres, Apellidos, Edad, Genero, Direccion, Turno, Telefono, Email, Cargo, Horario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            ps = conexion.prepareStatement(sql);
+            ps.setInt(1, Integer.parseInt(cedula));
+            ps.setString(2, nombres);
+            ps.setString(3, apellidos);
+            ps.setInt(4, Integer.parseInt(edad)); // Convertimos a entero
+            ps.setString(5, genero);
+            ps.setString(6, direccion);
+            ps.setString(7, turno);
+            ps.setString(8, telefono);
+            ps.setString(9, email);
+            ps.setString(10, cargo);
+            ps.setString(11, horario);
+            ps.executeUpdate();
+
+            JOptionPane.showMessageDialog(this, "Empleado registrado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+            // Limpiar campos después del registro exitoso
+            cedulaField.setText("");
+            nombresField.setText("");
+            apellidosField.setText("");
+            edadField.setText("");
+            generoField.setText("");
+            direccionField.setText("");
+            turnoField.setText("");
+            telefonoField.setText("");
+            emailField.setText("");
+            cargoField.setText("");
+            turnoField.setText("");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al registrar el empleado:\n" + e.getMessage(), "Error en la operación", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                if (ps != null) ps.close();
+                if (conexion != null) conexion.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Error al cerrar la conexión:\n" + e.getMessage(), "Error en la operación", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
     
     /**
@@ -83,18 +151,18 @@ public class RegistroEmpleados extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         panelBorder3 = new com.raven.swing.PanelBorder();
         jLabel3 = new javax.swing.JLabel();
-        nombreField = new javax.swing.JTextField();
-        apellidoField = new javax.swing.JTextField();
+        nombresField = new javax.swing.JTextField();
+        apellidosField = new javax.swing.JTextField();
         edadField = new javax.swing.JTextField();
         direccionField = new javax.swing.JTextField();
-        horarioField = new javax.swing.JTextField();
-        generoLabel = new javax.swing.JTextField();
+        turnoField = new javax.swing.JTextField();
+        generoField = new javax.swing.JTextField();
         panelBorder5 = new com.raven.swing.PanelBorder();
         jLabel16 = new javax.swing.JLabel();
-        carrera_sol2 = new javax.swing.JTextField();
-        telefono_sol4 = new javax.swing.JTextField();
-        cedula_sol8 = new javax.swing.JTextField();
-        nombre_sol2 = new javax.swing.JTextField();
+        emailField = new javax.swing.JTextField();
+        trabajoField = new javax.swing.JTextField();
+        cargoField = new javax.swing.JTextField();
+        telefonoField = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -173,17 +241,17 @@ public class RegistroEmpleados extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Información personal");
 
-        nombreField.setText("Nombre:");
-        nombreField.addActionListener(new java.awt.event.ActionListener() {
+        nombresField.setText("Nombres:");
+        nombresField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreFieldActionPerformed(evt);
+                nombresFieldActionPerformed(evt);
             }
         });
 
-        apellidoField.setText("Apellido:");
-        apellidoField.addActionListener(new java.awt.event.ActionListener() {
+        apellidosField.setText("Apellidos:");
+        apellidosField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                apellidoFieldActionPerformed(evt);
+                apellidosFieldActionPerformed(evt);
             }
         });
 
@@ -201,17 +269,17 @@ public class RegistroEmpleados extends javax.swing.JPanel {
             }
         });
 
-        horarioField.setText("Turno:");
-        horarioField.addActionListener(new java.awt.event.ActionListener() {
+        turnoField.setText("Turno:");
+        turnoField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                horarioFieldActionPerformed(evt);
+                turnoFieldActionPerformed(evt);
             }
         });
 
-        generoLabel.setText("Género:");
-        generoLabel.addActionListener(new java.awt.event.ActionListener() {
+        generoField.setText("Género:");
+        generoField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                generoLabelActionPerformed(evt);
+                generoFieldActionPerformed(evt);
             }
         });
 
@@ -225,11 +293,11 @@ public class RegistroEmpleados extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addGroup(panelBorder3Layout.createSequentialGroup()
                         .addGroup(panelBorder3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(generoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nombreField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(generoField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombresField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(47, 47, 47)
                         .addGroup(panelBorder3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(apellidoField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(apellidosField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(direccionField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(panelBorder3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelBorder3Layout.createSequentialGroup()
@@ -237,7 +305,7 @@ public class RegistroEmpleados extends javax.swing.JPanel {
                                 .addComponent(edadField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder3Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(horarioField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(turnoField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBorder3Layout.setVerticalGroup(
@@ -247,14 +315,14 @@ public class RegistroEmpleados extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addGap(27, 27, 27)
                 .addGroup(panelBorder3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombreField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(apellidoField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombresField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(apellidosField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(edadField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelBorder3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(direccionField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(generoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(horarioField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(generoField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(turnoField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(109, 109, 109))
         );
 
@@ -264,9 +332,9 @@ public class RegistroEmpleados extends javax.swing.JPanel {
         jLabel16.setForeground(new java.awt.Color(127, 127, 127));
         jLabel16.setText("Cargo laboral");
 
-        cedula_sol8.addActionListener(new java.awt.event.ActionListener() {
+        cargoField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cedula_sol8ActionPerformed(evt);
+                cargoFieldActionPerformed(evt);
             }
         });
 
@@ -307,13 +375,13 @@ public class RegistroEmpleados extends javax.swing.JPanel {
                             .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel20)
                                 .addComponent(jLabel17)
-                                .addComponent(nombre_sol2)
-                                .addComponent(carrera_sol2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(telefonoField)
+                                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel24))
                         .addGap(62, 62, 62)
                         .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(telefono_sol4, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cedula_sol8, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(trabajoField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cargoField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel21)
                             .addComponent(jLabel16)
                             .addComponent(jLabel18))
@@ -337,16 +405,16 @@ public class RegistroEmpleados extends javax.swing.JPanel {
                     .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombre_sol2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cedula_sol8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(telefonoField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cargoField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(jLabel21))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(telefono_sol4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(carrera_sol2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(trabajoField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64))
@@ -389,13 +457,13 @@ public class RegistroEmpleados extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nombreFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreFieldActionPerformed
+    private void nombresFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombresFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nombreFieldActionPerformed
+    }//GEN-LAST:event_nombresFieldActionPerformed
 
-    private void apellidoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidoFieldActionPerformed
+    private void apellidosFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidosFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_apellidoFieldActionPerformed
+    }//GEN-LAST:event_apellidosFieldActionPerformed
 
     private void edadFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edadFieldActionPerformed
         // TODO add your handling code here:
@@ -405,33 +473,32 @@ public class RegistroEmpleados extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_direccionFieldActionPerformed
 
-    private void horarioFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horarioFieldActionPerformed
+    private void turnoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turnoFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_horarioFieldActionPerformed
+    }//GEN-LAST:event_turnoFieldActionPerformed
 
-    private void generoLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generoLabelActionPerformed
+    private void generoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generoFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_generoLabelActionPerformed
+    }//GEN-LAST:event_generoFieldActionPerformed
 
-    private void cedula_sol8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedula_sol8ActionPerformed
+    private void cargoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargoFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cedula_sol8ActionPerformed
+    }//GEN-LAST:event_cargoFieldActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+        registrarEmpleado();
     }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField apellidoField;
-    private javax.swing.JTextField carrera_sol2;
+    private javax.swing.JTextField apellidosField;
+    private javax.swing.JTextField cargoField;
     private javax.swing.JTextField cedulaField;
-    private javax.swing.JTextField cedula_sol8;
     private javax.swing.JTextField direccionField;
     private javax.swing.JTextField edadField;
-    private javax.swing.JTextField generoLabel;
-    private javax.swing.JTextField horarioField;
+    private javax.swing.JTextField emailField;
+    private javax.swing.JTextField generoField;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -445,12 +512,13 @@ public class RegistroEmpleados extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField nombreField;
-    private javax.swing.JTextField nombre_sol2;
+    private javax.swing.JTextField nombresField;
     private com.raven.swing.PanelBorder panel;
     private com.raven.swing.PanelBorder panel1;
     private com.raven.swing.PanelBorder panelBorder3;
     private com.raven.swing.PanelBorder panelBorder5;
-    private javax.swing.JTextField telefono_sol4;
+    private javax.swing.JTextField telefonoField;
+    private javax.swing.JTextField trabajoField;
+    private javax.swing.JTextField turnoField;
     // End of variables declaration//GEN-END:variables
 }

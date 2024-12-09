@@ -192,12 +192,12 @@
                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="generoLabel" min="-2" pref="230" max="-2" attributes="0"/>
-                              <Component id="nombreField" min="-2" pref="230" max="-2" attributes="0"/>
+                              <Component id="generoField" min="-2" pref="230" max="-2" attributes="0"/>
+                              <Component id="nombresField" min="-2" pref="230" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="apellidoField" alignment="1" min="-2" pref="230" max="-2" attributes="0"/>
+                              <Component id="apellidosField" alignment="1" min="-2" pref="230" max="-2" attributes="0"/>
                               <Component id="direccionField" alignment="1" min="-2" pref="230" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -207,7 +207,7 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="horarioField" min="-2" pref="230" max="-2" attributes="0"/>
+                                  <Component id="turnoField" min="-2" pref="230" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -223,15 +223,15 @@
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nombreField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                      <Component id="apellidoField" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="nombresField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="apellidosField" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                       <Component id="edadField" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="direccionField" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="generoLabel" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="horarioField" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="generoField" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="turnoField" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
               </Group>
@@ -250,20 +250,20 @@
             <Property name="text" type="java.lang.String" value="Informaci&#xf3;n personal"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="nombreField">
+        <Component class="javax.swing.JTextField" name="nombresField">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nombre:"/>
+            <Property name="text" type="java.lang.String" value="Nombres:"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombreFieldActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombresFieldActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="apellidoField">
+        <Component class="javax.swing.JTextField" name="apellidosField">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Apellido:"/>
+            <Property name="text" type="java.lang.String" value="Apellidos:"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="apellidoFieldActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="apellidosFieldActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="edadField">
@@ -282,20 +282,20 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="direccionFieldActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="horarioField">
+        <Component class="javax.swing.JTextField" name="turnoField">
           <Properties>
             <Property name="text" type="java.lang.String" value="Turno:"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="horarioFieldActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="turnoFieldActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="generoLabel">
+        <Component class="javax.swing.JTextField" name="generoField">
           <Properties>
             <Property name="text" type="java.lang.String" value="G&#xe9;nero:"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="generoLabelActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="generoFieldActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -318,15 +318,15 @@
                               <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel17" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="nombre_sol2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="carrera_sol2" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
+                                  <Component id="telefonoField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="emailField" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="telefono_sol4" min="-2" pref="198" max="-2" attributes="0"/>
-                              <Component id="cedula_sol8" min="-2" pref="198" max="-2" attributes="0"/>
+                              <Component id="trabajoField" min="-2" pref="198" max="-2" attributes="0"/>
+                              <Component id="cargoField" min="-2" pref="198" max="-2" attributes="0"/>
                               <Component id="jLabel21" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
@@ -358,8 +358,8 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nombre_sol2" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="cedula_sol8" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="telefonoField" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="cargoField" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -368,8 +368,8 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="telefono_sol4" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="carrera_sol2" min="-2" pref="44" max="-2" attributes="0"/>
+                      <Component id="trabajoField" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="emailField" min="-2" pref="44" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jButton3" min="-2" pref="40" max="-2" attributes="0"/>
@@ -394,16 +394,16 @@
             <Property name="text" type="java.lang.String" value="Cargo laboral"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="carrera_sol2">
+        <Component class="javax.swing.JTextField" name="emailField">
         </Component>
-        <Component class="javax.swing.JTextField" name="telefono_sol4">
+        <Component class="javax.swing.JTextField" name="trabajoField">
         </Component>
-        <Component class="javax.swing.JTextField" name="cedula_sol8">
+        <Component class="javax.swing.JTextField" name="cargoField">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cedula_sol8ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cargoFieldActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="nombre_sol2">
+        <Component class="javax.swing.JTextField" name="telefonoField">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel17">
           <Properties>

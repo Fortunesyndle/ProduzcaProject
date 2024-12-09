@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class Conexion {
     public static Connection con;
     private static final String driver ="com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/bibliotecadb";
+    private static final String URL = "jdbc:mysql://localhost:3306/produzcaproject";
     private static final String user = "root";
     private static final String password = "";
     

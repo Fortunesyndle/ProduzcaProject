@@ -5,6 +5,7 @@ import com.raven.model.Model_Card;
 
 import com.raven.swing.ScrollBar;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,6 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import raven.application.Application;
 import raven.conexion.Conexion;
 
 public class ListaEmpleados extends javax.swing.JPanel {
@@ -101,20 +103,24 @@ public class ListaEmpleados extends javax.swing.JPanel {
     public void mostrarTabla() {
         
         
-        String sql = "SELECT * FROM tesis";
+        String sql = "SELECT * FROM empleados";
         Conexion cn = new Conexion();
         Connection conexion = cn.conectar();
 
         DefaultTableModel model = new DefaultTableModel();
 
-        model.addColumn("ID Tesis");
-        model.addColumn("Titulo");
-        model.addColumn("Autor");
         model.addColumn("Cedula");
-        model.addColumn("Fecha");
-        model.addColumn("Especialidad");
-        model.addColumn("Enumeracion");
-        
+        model.addColumn("Nombres");
+        model.addColumn("Apellidos");
+        model.addColumn("Edad");
+        model.addColumn("Genero");
+        model.addColumn("Direccion");
+        model.addColumn("Turno");
+        model.addColumn("Telefono");
+        model.addColumn("Email");
+        model.addColumn("Cargo");
+        model.addColumn("Horario");
+       
 
         table.setModel(model);
 
@@ -131,6 +137,10 @@ public class ListaEmpleados extends javax.swing.JPanel {
                 datos.add(rs.getString(5));
                 datos.add(rs.getString(6));
                 datos.add(rs.getString(7));
+                datos.add(rs.getString(8));
+                datos.add(rs.getString(9));
+                datos.add(rs.getString(10));
+                datos.add(rs.getString(11));
 
                 // Convierte el ArrayList a un array y luego agrega la fila al modelo
                 model.addRow(datos.toArray(new String[0]));
@@ -252,98 +262,101 @@ public class ListaEmpleados extends javax.swing.JPanel {
         }
     }
     
-    private void modificarTesis() {
-        int selectedRow = table.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Selecciona un registro primero.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+    private void modificarEmpleado() {
+    int selectedRow = table.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Selecciona un registro primero.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-        // Obtener los datos del registro seleccionado
-        String id = (String) table.getValueAt(selectedRow, 0);
-        String titulo = (String) table.getValueAt(selectedRow, 1);
-        String autor = (String) table.getValueAt(selectedRow, 2);
-        String cedula = (String) table.getValueAt(selectedRow, 3);
-        String fecha = (String) table.getValueAt(selectedRow, 4);
-        String especialidad = (String) table.getValueAt(selectedRow, 5);
-        String enumeracion = (String) table.getValueAt(selectedRow, 6);
+    // Obtener datos existentes y convertirlos adecuadamente
+    String cedulaStr = table.getValueAt(selectedRow, 0).toString(); // Convertir a String
+    String nombres = (String) table.getValueAt(selectedRow, 1);
+    String apellidos = (String) table.getValueAt(selectedRow, 2);
+    String edadStr = table.getValueAt(selectedRow, 3).toString(); // Convertir a String
+    String genero = (String) table.getValueAt(selectedRow, 4);
+    String direccion = (String) table.getValueAt(selectedRow, 5);
+    String turno = (String) table.getValueAt(selectedRow, 6);
+    String telefono = (String) table.getValueAt(selectedRow, 7);
+    String email = (String) table.getValueAt(selectedRow, 8);
+    String cargo = (String) table.getValueAt(selectedRow, 9);
+    String horario = (String) table.getValueAt(selectedRow, 10);
 
-        // Panel del formulario para modificar
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+    // Convertir cedula y edad a int
+    int cedula, edad;
+    try {
+        cedula = Integer.parseInt(cedulaStr);
+        edad = Integer.parseInt(edadStr); // Conversión correcta
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "La cédula y la edad deben ser números válidos.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
+        return; // Salir si la conversión falla
+    }
 
-        // Crear los componentes del formulario
-        JLabel idLabel = new JLabel("ID:");
-        JTextField idField = new JTextField(id, 8);
-        JLabel tituloLabel = new JLabel("Titulo:");
-        JTextField tituloField = new JTextField(titulo, 8);
-        JLabel autorLabel = new JLabel("Autor:");
-        JTextField autorField = new JTextField(autor, 8);
-        JLabel cedulaLabel = new JLabel("Cedula:");
-        JTextField cedulaField = new JTextField(cedula, 8);
-        JLabel fechaLabel = new JLabel("Fecha:");
-        JTextField fechaField = new JTextField(fecha, 8);
-        JLabel especialidadLabel = new JLabel("Especialidad:");
-        JTextField especialidadField = new JTextField(especialidad, 8);
-        JLabel enumeracionLabel = new JLabel("Enumeracion:");
-        JTextField enumeracionField = new JTextField(enumeracion, 8);
+    // Crear campos de entrada
+    JTextField[] fields = {
+        new JTextField(nombres),
+        new JTextField(apellidos),
+        new JTextField(String.valueOf(edad)),
+        new JTextField(genero),
+        new JTextField(direccion),
+        new JTextField(turno),
+        new JTextField(telefono),
+        new JTextField(email),
+        new JTextField(cargo),
+        new JTextField(horario)
+    };
 
-        // Añadir los componentes al panel
-        panel.add(idLabel);
-        panel.add(idField);
-        panel.add(tituloLabel);
-        panel.add(tituloField);
-        panel.add(autorLabel);
-        panel.add(autorField);
-        panel.add(cedulaLabel);
-        panel.add(cedulaField);
-        panel.add(fechaLabel);
-        panel.add(fechaField);
-        panel.add(especialidadLabel);
-        panel.add(especialidadField);
-        panel.add(enumeracionLabel);
-        panel.add(enumeracionField);
+    // Crear panel para el diálogo
+    JPanel panel = new JPanel(new GridLayout(11, 2));
+    String[] labels = {"Nombres:", "Apellidos:", "Edad:", "Género:", "Dirección:", "Turno:", "Teléfono:", "Email:", "Cargo:", "Horario:"};
+    
+    for (int i = 0; i < labels.length; i++) {
+        panel.add(new JLabel(labels[i]));
+        panel.add(fields[i]);
+    }
 
-        int result = JOptionPane.showConfirmDialog(null, panel, "Modificar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-        
-        if (result == JOptionPane.OK_OPTION) {
-            try {
-                if (tituloField.getText().isBlank() || autorField.getText().isBlank() || cedulaField.getText().isBlank() || fechaField.getText().isBlank() || especialidadField.getText().isBlank()) {
-                    JOptionPane.showMessageDialog(null, "Faltan campos por llenar", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    // Conectar a la base de datos y actualizar el registro
-                    Conexion cn = new Conexion();
-                    Connection conexion = cn.conectar();
-                    String sql = "UPDATE Tesis SET Titulo = ?, Autor = ?, Cedula = ?, Fecha = ?, Especialidad = ?, Enumeracion = ? WHERE ID_Tesis = ?";
-                    PreparedStatement ps2 = conexion.prepareStatement(sql);
+    // Mostrar diálogo de modificación
+    int result = JOptionPane.showConfirmDialog(this, panel, "Modificar Empleado", JOptionPane.OK_CANCEL_OPTION);
+    
+    if (result == JOptionPane.OK_OPTION) {
+        try (Connection conexion = new Conexion().conectar(); 
+             PreparedStatement ps = conexion.prepareStatement("UPDATE empleados SET Nombres = ?, Apellidos = ?, Edad = ?, Genero = ?, Direccion = ?, Turno = ?, Telefono = ?, Email = ?, Cargo = ?, Horario = ? WHERE Cedula = ?")) {
 
-                    ps2.setString(1, tituloField.getText());
-                    ps2.setString(2, autorField.getText());
-                    ps2.setString(3, cedulaField.getText());
-                    ps2.setString(4, fechaField.getText());
-                    ps2.setString(5, especialidadField.getText());
-                    ps2.setString(6, enumeracionField.getText());
-                    ps2.setInt(7, Integer.parseInt(idField.getText()));
+            // Asignar valores a la consulta
+            ps.setString(1, fields[0].getText());
+            ps.setString(2, fields[1].getText());
+            ps.setInt(3, Integer.parseInt(fields[2].getText())); // Convertir a entero
+            ps.setString(4, fields[3].getText());
+            ps.setString(5, fields[4].getText());
+            ps.setString(6, fields[5].getText());
+            ps.setString(7, fields[6].getText());
+            ps.setString(8, fields[7].getText());
+            ps.setString(9, fields[8].getText());
+            ps.setString(10, fields[9].getText());
+            ps.setInt(11, cedula);
 
-                    int rowsAffected = ps2.executeUpdate();
+            // Ejecutar actualización
+            ps.executeUpdate();
 
-                    if (rowsAffected > 0) {
-                        JOptionPane.showMessageDialog(null, "Registro actualizado", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
-                        table.setValueAt(tituloField.getText(), selectedRow, 1);
-                        table.setValueAt(autorField.getText(), selectedRow, 2);
-                        table.setValueAt(cedulaField.getText(), selectedRow, 3);
-                        table.setValueAt(fechaField.getText(), selectedRow, 4);
-                        table.setValueAt(especialidadField.getText(), selectedRow, 5);
-                        table.setValueAt(enumeracionField.getText(), selectedRow, 6);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se encontró el registro con ID: " + idField.getText(), "Advertencia", JOptionPane.WARNING_MESSAGE);
-                    }
-                }
-            } catch (HeadlessException | NumberFormatException | SQLException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-            }
+            // Actualizar la tabla con los nuevos datos
+            table.setValueAt(fields[0].getText(), selectedRow, 1);
+            table.setValueAt(fields[1].getText(), selectedRow, 2);
+            table.setValueAt(Integer.parseInt(fields[2].getText()), selectedRow, 3);
+            table.setValueAt(fields[3].getText(), selectedRow, 4);
+            table.setValueAt(fields[4].getText(), selectedRow, 5);
+            table.setValueAt(fields[5].getText(), selectedRow, 6);
+            table.setValueAt(fields[6].getText(), selectedRow, 7);
+            table.setValueAt(fields[7].getText(), selectedRow, 8);
+            table.setValueAt(fields[8].getText(), selectedRow, 9);
+            table.setValueAt(fields[9].getText(), selectedRow, 10);
+
+            JOptionPane.showMessageDialog(this, "Empleado modificado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al modificar el empleado:\n" + e.getMessage(), "Error en la operación", JOptionPane.ERROR_MESSAGE);
         }
     }
+}
+
 
 
     
@@ -378,53 +391,43 @@ public class ListaEmpleados extends javax.swing.JPanel {
     }
 }
    
-     private void eliminarTesis(){
-         
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+private void eliminarEmpleado() {
+    int selectedRow = table.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Selecciona un registro primero.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-        // Crear los componentes del formulario
-        JLabel mensaje = new JLabel ("Ingrese el ID del registro que desea eliminar");
-        JLabel tituloLabel = new JLabel("ID:");
-        JTextField tituloField = new JTextField(8);
-        panel.add(mensaje);
-        panel.add(tituloLabel);
-        panel.add(tituloField);
-        int result = JOptionPane.showConfirmDialog(null, panel, "Eliminar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-        
-        if (result == JOptionPane.OK_OPTION) {
-            try {
-                if (tituloField.getText().isBlank()) {
-                    JOptionPane.showMessageDialog(null, "El campo ID está vacío", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    Conexion cn = new Conexion();
-                    Connection conexion = cn.conectar();
+    // Obtener la cédula del empleado a eliminar
+    String cedulaStr = table.getValueAt(selectedRow, 0).toString(); // Convertir a String
+    int cedula;
+    try {
+        cedula = Integer.parseInt(cedulaStr); // Convertir a entero
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "La cédula debe ser un número válido.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
+        return; // Salir si la conversión falla
+    }
 
-                    String Titulo = tituloField.getText();
+    // Confirmar eliminación
+    int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este registro?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+    if (confirm != JOptionPane.YES_OPTION) {
+        return; // Salir si no se confirma la eliminación
+    }
 
-                    String sql = "DELETE FROM Tesis WHERE ID_Tesis = ?";
+    // Conectar a la base de datos y eliminar el registro
+    try (Connection conexion = new Conexion().conectar(); 
+         PreparedStatement ps = conexion.prepareStatement("DELETE FROM empleados WHERE Cedula = ?")) {
 
-                    PreparedStatement ps = conexion.prepareStatement(sql);
-                    ps.setString(1, Titulo);
+        ps.setInt(1, cedula);
+        ps.executeUpdate();
 
-                    int rowsAffected = ps.executeUpdate();
-                    if (rowsAffected > 0) {
-                        JOptionPane.showMessageDialog(null, "Registro eliminado", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se encontró un registro con ese título", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
 
-                    // Limpiar el campo después de la eliminación exitosa
-                    tituloField.setText("");
+        JOptionPane.showMessageDialog(this, "Empleado eliminado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al eliminar el empleado:\n" + e.getMessage(), "Error en la operación", JOptionPane.ERROR_MESSAGE);
+    }
+}
 
-                    // Cerrar la conexión
-                    conexion.close();
-                }
-            } catch (HeadlessException | SQLException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-            }
-     }
-     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -504,8 +507,18 @@ public class ListaEmpleados extends javax.swing.JPanel {
         });
 
         modificarbtn.setText("Modificar");
+        modificarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarbtnActionPerformed(evt);
+            }
+        });
 
         eliminarbtn.setText("Eliminar");
+        eliminarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarbtnActionPerformed(evt);
+            }
+        });
 
         lb.setText("Listado de empleados");
 
@@ -576,6 +589,17 @@ public class ListaEmpleados extends javax.swing.JPanel {
          agregarTesis();
         mostrarTabla();
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void modificarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarbtnActionPerformed
+        // TODO add your handling code here:
+        modificarEmpleado();
+    }//GEN-LAST:event_modificarbtnActionPerformed
+
+    private void eliminarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarbtnActionPerformed
+        // TODO add your handling code here:
+        eliminarEmpleado();
+        mostrarTabla();
+    }//GEN-LAST:event_eliminarbtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
