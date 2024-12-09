@@ -100,51 +100,40 @@ public class RegistroEntradas extends javax.swing.JPanel {
     }
     
     public void mostrarTabla() {
-        
-        
-        String sql = "SELECT * FROM tesis";
-        Conexion cn = new Conexion();
-        Connection conexion = cn.conectar();
+    String sql = "SELECT Cedula, Fecha, Hora FROM entrada";
+    Conexion cn = new Conexion();
+    Connection conexion = cn.conectar();
 
-        DefaultTableModel model = new DefaultTableModel();
+    DefaultTableModel model = new DefaultTableModel();
 
-        model.addColumn("ID Tesis");
-        model.addColumn("Titulo");
-        model.addColumn("Autor");
-        model.addColumn("Cedula");
-        model.addColumn("Fecha");
-        model.addColumn("Especialidad");
-        model.addColumn("Enumeracion");
-        
+    model.addColumn("Cedula");
+    model.addColumn("Fecha");
+    model.addColumn("Hora");
 
-        table.setModel(model);
+    table.setModel(model);
 
-        try {
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+    try {
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                ArrayList<String> datos = new ArrayList<>();
-                datos.add(rs.getString(1));
-                datos.add(rs.getString(2));
-                datos.add(rs.getString(3));
-                datos.add(rs.getString(4));
-                datos.add(rs.getString(5));
-                datos.add(rs.getString(6));
-                datos.add(rs.getString(7));
+        while (rs.next()) {
+            ArrayList<String> datos = new ArrayList<>();
+            datos.add(rs.getString("Cedula"));
+            datos.add(rs.getString("Fecha"));
+            datos.add(rs.getString("Hora"));
 
-                // Convierte el ArrayList a un array y luego agrega la fila al modelo
-                model.addRow(datos.toArray(new String[0]));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            // Convierte el ArrayList a un array y luego agrega la fila al modelo
+            model.addRow(datos.toArray(new String[0]));
         }
-        for (int i = 0; i < table.getColumnCount(); i++) {
-            Class<?> col_class = table.getColumnClass(i);
-            table.setDefaultEditor(col_class, null); // Esto hace que la celda no sea editable
-        }
-
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
     }
+    for (int i = 0; i < table.getColumnCount(); i++) {
+        Class<?> col_class = table.getColumnClass(i);
+        table.setDefaultEditor(col_class, null); // Esto hace que la celda no sea editable
+    }
+}
+
     
     private String texto(JTextField jff) {
 
