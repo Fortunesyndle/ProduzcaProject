@@ -167,57 +167,42 @@ public class Entrada extends javax.swing.JPanel {
         panel1.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nombrelbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         nombrelbl.setText("Nombres");
-        jPanel1.add(nombrelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, -1, -1));
 
         apellidolbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         apellidolbl.setText("Apellidos");
-        jPanel1.add(apellidolbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
 
         cedulalbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         cedulalbl.setText("Cédula");
-        jPanel1.add(cedulalbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, -1));
 
         jornadalbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jornadalbl.setText("Hora registrada");
-        jPanel1.add(jornadalbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, -1, -1));
 
         entradalbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         entradalbl.setText("Hora de entrada");
-        jPanel1.add(entradalbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, -1, -1));
 
         idlbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         idlbl.setText("Cargo");
-        jPanel1.add(idlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, -1, -1));
 
         observacioneslbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         observacioneslbl.setText("Observaciones");
-        jPanel1.add(observacioneslbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, -1, -1));
 
         nombretxt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102), 2));
         nombretxt.setCaretColor(new java.awt.Color(255, 255, 255));
-        jPanel1.add(nombretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 180, 30));
 
         apellidostxt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102), 2));
-        jPanel1.add(apellidostxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 180, 30));
 
         cedulatxt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102), 2));
-        jPanel1.add(cedulatxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 180, 30));
 
         cargotxt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102), 2));
-        jPanel1.add(cargotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 180, 30));
 
         turnotxt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102), 2));
-        jPanel1.add(turnotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, 180, 30));
 
         entradatxt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102), 2));
-        jPanel1.add(entradatxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 180, 30));
 
         observacionestxt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102), 2));
-        jPanel1.add(observacionestxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, 181, 30));
 
         entradabtn.setBackground(new java.awt.Color(51, 51, 255));
         entradabtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -228,7 +213,6 @@ public class Entrada extends javax.swing.JPanel {
                 entradabtnActionPerformed(evt);
             }
         });
-        jPanel1.add(entradabtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, -1, -1));
 
         ingresarCedula.setForeground(new java.awt.Color(102, 102, 102));
         ingresarCedula.setText("  Cedula...");
@@ -239,7 +223,6 @@ public class Entrada extends javax.swing.JPanel {
                 ingresarCedulaActionPerformed(evt);
             }
         });
-        jPanel1.add(ingresarCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 160, 30));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -252,7 +235,93 @@ public class Entrada extends javax.swing.JPanel {
             .addGap(0, 10, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 500, -1, 10));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(249, 249, 249)
+                .addComponent(ingresarCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(219, 219, 219)
+                .addComponent(nombrelbl)
+                .addGap(33, 33, 33)
+                .addComponent(nombretxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(219, 219, 219)
+                .addComponent(apellidolbl)
+                .addGap(31, 31, 31)
+                .addComponent(apellidostxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(239, 239, 239)
+                .addComponent(cedulalbl)
+                .addGap(32, 32, 32)
+                .addComponent(cedulatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(249, 249, 249)
+                .addComponent(idlbl)
+                .addGap(30, 30, 30)
+                .addComponent(cargotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(169, 169, 169)
+                .addComponent(jornadalbl)
+                .addGap(27, 27, 27)
+                .addComponent(turnotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(159, 159, 159)
+                .addComponent(entradalbl)
+                .addGap(31, 31, 31)
+                .addComponent(entradatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(179, 179, 179)
+                .addComponent(observacioneslbl)
+                .addGap(26, 26, 26)
+                .addComponent(observacionestxt, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(279, 279, 279)
+                .addComponent(entradabtn))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(269, 269, 269)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(ingresarCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nombrelbl)
+                    .addComponent(nombretxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(apellidolbl)
+                    .addComponent(apellidostxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cedulalbl)
+                    .addComponent(cedulatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(idlbl)
+                    .addComponent(cargotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jornadalbl)
+                    .addComponent(turnotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(entradalbl)
+                    .addComponent(entradatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(observacioneslbl)
+                    .addComponent(observacionestxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(entradabtn)
+                .addGap(23, 23, 23)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 102));
 
@@ -289,7 +358,7 @@ public class Entrada extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
@@ -303,7 +372,7 @@ public class Entrada extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents

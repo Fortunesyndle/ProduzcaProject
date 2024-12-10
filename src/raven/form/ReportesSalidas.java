@@ -300,13 +300,9 @@ public class ReportesSalidas extends javax.swing.JPanel {
 
         jLabel2.setText("jLabel2");
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         panel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
-        add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 1142, -1));
 
         panel1.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
-        add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 6, 1122, -1));
 
         panelBorder1.setBackground(new java.awt.Color(0, 0, 102));
         panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -338,8 +334,6 @@ public class ReportesSalidas extends javax.swing.JPanel {
 
         panelBorder1.add(spTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1140, 394));
 
-        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 168, 1136, -1));
-
         jPanel2.setBackground(new java.awt.Color(0, 0, 102));
 
         lb.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -363,12 +357,9 @@ public class ReportesSalidas extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, 50));
-
         busqueda_field.setForeground(new java.awt.Color(102, 102, 102));
         busqueda_field.setText("  Cedula...");
         busqueda_field.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 255), 2, true));
-        add(busqueda_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(253, 87, 207, 40));
 
         puntualidadComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "               ", "Puntual", "Temprano" }));
         puntualidadComboBox.setToolTipText("");
@@ -378,11 +369,51 @@ public class ReportesSalidas extends javax.swing.JPanel {
                 puntualidadComboBoxActionPerformed(evt);
             }
         });
-        add(puntualidadComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(513, 87, -1, 40));
 
         dateChooser.setFuente(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         dateChooser.setPlaceholder("Seleccionar Fecha");
-        add(dateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(653, 87, 200, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1122, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 1142, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(253, 253, 253)
+                .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(puntualidadComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 1136, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(puntualidadComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void puntualidadComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_puntualidadComboBoxActionPerformed

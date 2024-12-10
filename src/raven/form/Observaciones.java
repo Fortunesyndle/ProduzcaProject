@@ -41,24 +41,7 @@ public class Observaciones extends javax.swing.JPanel {
                 + "font:$h1.font");
         
         
-        busqueda_field.addActionListener(e -> buscarDatos(busqueda_field.getText()));
-        
-        busqueda_field.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                buscarDatos(busqueda_field.getText());
-            }
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                buscarDatos(busqueda_field.getText());
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                buscarDatos(busqueda_field.getText());
-            }
-        });
        
     }
     
@@ -429,7 +412,7 @@ public class Observaciones extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         lb = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        busqueda_field = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
@@ -515,10 +498,10 @@ public class Observaciones extends javax.swing.JPanel {
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 1120, 50));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 204), 2, true));
-        jScrollPane1.setViewportView(jTextArea1);
+        busqueda_field.setColumns(20);
+        busqueda_field.setRows(5);
+        busqueda_field.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 204), 2, true));
+        jScrollPane1.setViewportView(busqueda_field);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 410, 80));
 
@@ -540,12 +523,12 @@ public class Observaciones extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea busqueda_field;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lb;
     private javax.swing.JLayeredPane panel;
     private javax.swing.JLayeredPane panel1;
