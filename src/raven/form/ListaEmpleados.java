@@ -450,18 +450,23 @@ private void eliminarEmpleado() {
         jLabel6 = new javax.swing.JLabel();
         modificarbtn = new javax.swing.JButton();
         eliminarbtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         lb = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         panel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
+        add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(674, 36, 498, -1));
 
         panel1.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
+        add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 6, 1132, -1));
 
-        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+        panelBorder1.setBackground(new java.awt.Color(0, 0, 102));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(127, 127, 127));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Detalles de las tesis");
 
         spTable.setBorder(null);
@@ -491,11 +496,8 @@ private void eliminarEmpleado() {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 1114, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(965, Short.MAX_VALUE))
+            .addComponent(spTable, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -507,88 +509,62 @@ private void eliminarEmpleado() {
                 .addGap(14, 14, 14))
         );
 
+        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 200, 1160, -1));
+        add(busqueda_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 610, -1));
+
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
             }
         });
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 60, 102, 128));
 
+        modificarbtn.setBackground(new java.awt.Color(0, 0, 153));
+        modificarbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        modificarbtn.setForeground(new java.awt.Color(255, 255, 255));
         modificarbtn.setText("Modificar");
         modificarbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modificarbtnActionPerformed(evt);
             }
         });
+        add(modificarbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, -1, -1));
 
+        eliminarbtn.setBackground(new java.awt.Color(0, 0, 153));
+        eliminarbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        eliminarbtn.setForeground(new java.awt.Color(255, 255, 255));
         eliminarbtn.setText("Eliminar");
         eliminarbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarbtnActionPerformed(evt);
             }
         });
+        add(eliminarbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 130, -1, -1));
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 102));
+
+        lb.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lb.setForeground(new java.awt.Color(255, 255, 255));
         lb.setText("Listado de empleados");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(472, 472, 472)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(489, Short.MAX_VALUE)
                 .addComponent(lb)
-                .addGap(87, 87, 87)
-                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(477, 477, 477))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(251, 251, 251)
-                        .addComponent(modificarbtn)
-                        .addGap(209, 209, 209)
-                        .addComponent(eliminarbtn)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1110, Short.MAX_VALUE)
-                    .addGap(20, 20, 20)))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(modificarbtn)
-                            .addComponent(eliminarbtn))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(625, Short.MAX_VALUE)))
-        );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1150, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -615,6 +591,7 @@ private void eliminarEmpleado() {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lb;
     private javax.swing.JButton modificarbtn;
     private javax.swing.JLayeredPane panel;
