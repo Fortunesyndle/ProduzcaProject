@@ -73,7 +73,7 @@ public class Entrada extends javax.swing.JPanel {
 
         try {
             conexion = new Conexion().conectar(); // Asegúrate de que este método esté bien definido
-            String sqlEmpleado = "SELECT Cedula, Nombres, Apellidos, Horario FROM empleados WHERE Cedula = ?";
+            String sqlEmpleado = "SELECT Cedula, Nombres, Apellidos, Cargo, Turno, Entrada FROM empleados WHERE Cedula = ?";
             ps = conexion.prepareStatement(sqlEmpleado);
             ps.setString(1, cedula);
             rs = ps.executeQuery();
@@ -82,25 +82,32 @@ public class Entrada extends javax.swing.JPanel {
                 cedula = rs.getString("Cedula");
                 String nombres = rs.getString("Nombres");
                 String apellidos = rs.getString("Apellidos");
-                String horario = rs.getString("Horario");
+                String cargo = rs.getString("Cargo");
+                String turno = rs.getString("Turno");
+                String entrada = rs.getString("Entrada");
+                
                 
                 cedulatxt.setText(cedula);
                 nombretxt.setText(nombres);
                 apellidostxt.setText(apellidos);
-                jornadatxt.setText(horario);
+                cargotxt.setText(cargo);
+                turnotxt.setText(turno);
+                entradatxt.setText(entrada);
 
                 // Obtener la hora actual de entrada
                 LocalTime horaEntrada = LocalTime.now();
-                entradatxt.setText(horaEntrada.toString());
+                turnotxt.setText(horaEntrada.toString());
 
                 // Verificar si el empleado llegó a tiempo
-                LocalTime horaLimite = LocalTime.parse(horario);
+                LocalTime horaLimite = LocalTime.parse(entrada);
                 boolean llegoATiempo = !horaEntrada.isAfter(horaLimite);
 
                 // Registrar la entrada en la base de datos
-                String sqlRegistro = "INSERT INTO entrada (Cedula, Fecha, Hora) VALUES (?, CURRENT_DATE(), CURRENT_TIME())";
+                String sqlRegistro = "INSERT INTO entrada (Cedula, Nombres, Apellidos, Fecha, Hora) VALUES (?, ?, ?, CURRENT_DATE(), CURRENT_TIME())";
                 PreparedStatement psRegistro = conexion.prepareStatement(sqlRegistro);
                 psRegistro.setString(1, cedula);
+                psRegistro.setString(2, nombres);
+                psRegistro.setString(3, apellidos);
                 psRegistro.executeUpdate();
 
                 // Mostrar mensaje de llegada
@@ -142,9 +149,9 @@ public class Entrada extends javax.swing.JPanel {
         nombretxt = new javax.swing.JTextField();
         apellidostxt = new javax.swing.JTextField();
         cedulatxt = new javax.swing.JTextField();
-        jornadatxt = new javax.swing.JTextField();
+        cargotxt = new javax.swing.JTextField();
+        turnotxt = new javax.swing.JTextField();
         entradatxt = new javax.swing.JTextField();
-        idtxt = new javax.swing.JTextField();
         observacionestxt = new javax.swing.JTextField();
         entradabtn = new javax.swing.JButton();
         ingresarCedula = new javax.swing.JTextField();
@@ -162,11 +169,11 @@ public class Entrada extends javax.swing.JPanel {
 
         cedulalbl.setText("Cédula");
 
-        jornadalbl.setText("Horario Laboral");
+        jornadalbl.setText("Turno");
 
         entradalbl.setText("Hora de entrada");
 
-        idlbl.setText("ID-Entrada");
+        idlbl.setText("Cargo");
 
         observacioneslbl.setText("Observaciones");
 
@@ -182,39 +189,6 @@ public class Entrada extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(203, 203, 203)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(observacioneslbl)
-                        .addGap(131, 131, 131)
-                        .addComponent(observacionestxt))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(idlbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(idtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(entradalbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(entradatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jornadalbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jornadatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cedulalbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cedulatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(nombrelbl)
-                        .addGap(160, 160, 160)
-                        .addComponent(nombretxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(apellidolbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(apellidostxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(202, 202, 202))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(343, 343, 343)
@@ -223,6 +197,43 @@ public class Entrada extends javax.swing.JPanel {
                         .addGap(319, 319, 319)
                         .addComponent(ingresarCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(203, 203, 203)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(entradalbl)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(observacioneslbl)
+                                .addGap(131, 131, 131)
+                                .addComponent(observacionestxt))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jornadalbl)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(turnotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(idlbl)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cargotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cedulalbl)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cedulatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(apellidolbl)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(apellidostxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(entradatxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(nombrelbl)
+                                        .addGap(160, 160, 160)
+                                        .addComponent(nombretxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(202, 202, 202))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,16 +254,16 @@ public class Entrada extends javax.swing.JPanel {
                     .addComponent(cedulatxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jornadalbl)
-                    .addComponent(jornadatxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cargotxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idlbl))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(entradalbl)
-                    .addComponent(entradatxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(turnotxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jornadalbl))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idlbl)
-                    .addComponent(idtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(entradatxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(entradalbl))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(observacioneslbl)
@@ -308,17 +319,16 @@ public class Entrada extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel apellidolbl;
     private javax.swing.JTextField apellidostxt;
+    private javax.swing.JTextField cargotxt;
     private javax.swing.JLabel cedulalbl;
     private javax.swing.JTextField cedulatxt;
     private javax.swing.JButton entradabtn;
     private javax.swing.JLabel entradalbl;
     private javax.swing.JTextField entradatxt;
     private javax.swing.JLabel idlbl;
-    private javax.swing.JTextField idtxt;
     private javax.swing.JTextField ingresarCedula;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jornadalbl;
-    private javax.swing.JTextField jornadatxt;
     private javax.swing.JLabel lb;
     private javax.swing.JLabel nombrelbl;
     private javax.swing.JTextField nombretxt;
@@ -326,5 +336,6 @@ public class Entrada extends javax.swing.JPanel {
     private javax.swing.JTextField observacionestxt;
     private javax.swing.JLayeredPane panel;
     private javax.swing.JLayeredPane panel1;
+    private javax.swing.JTextField turnotxt;
     // End of variables declaration//GEN-END:variables
 }
