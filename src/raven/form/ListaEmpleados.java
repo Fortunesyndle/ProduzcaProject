@@ -510,7 +510,9 @@ private void eliminarEmpleado() {
         );
 
         add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 200, 1160, -1));
-        add(busqueda_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 610, -1));
+
+        busqueda_field.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 204), 2, true));
+        add(busqueda_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 610, 30));
 
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

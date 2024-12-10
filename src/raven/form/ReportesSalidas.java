@@ -292,7 +292,6 @@ public class ReportesSalidas extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         spTable = new javax.swing.JScrollPane();
         table = new com.raven.swing.Table();
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         lb = new javax.swing.JLabel();
         busqueda_field = new javax.swing.JTextField();
@@ -305,7 +304,7 @@ public class ReportesSalidas extends javax.swing.JPanel {
 
         panel1.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
-        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+        panelBorder1.setBackground(new java.awt.Color(0, 0, 102));
         panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
@@ -333,22 +332,7 @@ public class ReportesSalidas extends javax.swing.JPanel {
         });
         spTable.setViewportView(table);
 
-        panelBorder1.add(spTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1130, 394));
-
-        jPanel1.setBackground(new java.awt.Color(0, 0, 102));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1130, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
-        );
-
-        panelBorder1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1130, 60));
+        panelBorder1.add(spTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1140, 394));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 102));
 
@@ -368,7 +352,7 @@ public class ReportesSalidas extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(lb)
                 .addContainerGap())
         );
@@ -420,7 +404,7 @@ public class ReportesSalidas extends javax.swing.JPanel {
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -441,7 +425,6 @@ public class ReportesSalidas extends javax.swing.JPanel {
     private rojeru_san.componentes.RSDateChooser dateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lb;
     private javax.swing.JLayeredPane panel;
