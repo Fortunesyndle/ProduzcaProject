@@ -211,7 +211,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="salidalbl">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Turno"/>
+            <Property name="text" type="java.lang.String" value="Hora registrada"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="idlbl">

@@ -99,7 +99,7 @@ public class ReportesEntradas extends javax.swing.JPanel {
     }
     
     public void mostrarTabla() {
-    String sql = "SELECT Cedula, Nombres, Apellidos, Fecha, Hora FROM entrada";
+    String sql = "SELECT Cedula, Nombres, Apellidos, Fecha, Hora, Puntualidad FROM entrada";
     Conexion cn = new Conexion();
     Connection conexion = cn.conectar();
 
@@ -110,6 +110,7 @@ public class ReportesEntradas extends javax.swing.JPanel {
     model.addColumn("Apellidos");
     model.addColumn("Fecha");
     model.addColumn("Hora");
+    model.addColumn("Puntualidad");
 
     table.setModel(model);
 
@@ -124,6 +125,7 @@ public class ReportesEntradas extends javax.swing.JPanel {
             datos.add(rs.getString("Apellidos"));
             datos.add(rs.getString("Fecha"));
             datos.add(rs.getString("Hora"));
+            datos.add(rs.getString("Puntualidad"));
 
             // Convierte el ArrayList a un array y luego agrega la fila al modelo
             model.addRow(datos.toArray(new String[0]));

@@ -60,76 +60,79 @@ public class Entrada extends javax.swing.JPanel {
     }
     
     private void registrarEntrada() {
-        String cedula = ingresarCedula.getText().trim();
+    String cedula = ingresarCedula.getText().trim();
 
-        if (cedula.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingresa la cédula.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+    if (cedula.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa la cédula.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    Connection conexion = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    try {
+        conexion = new Conexion().conectar(); // Asegúrate de que este método esté bien definido
+        String sqlEmpleado = "SELECT Cedula, Nombres, Apellidos, Cargo, Turno, Entrada FROM empleados WHERE Cedula = ?";
+        ps = conexion.prepareStatement(sqlEmpleado);
+        ps.setString(1, cedula);
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+            cedula = rs.getString("Cedula");
+            String nombres = rs.getString("Nombres");
+            String apellidos = rs.getString("Apellidos");
+            String cargo = rs.getString("Cargo");
+            String turno = rs.getString("Turno");
+            String entrada = rs.getString("Entrada");
+
+            // Mostrar los datos en los textfields
+            cedulatxt.setText(cedula);
+            nombretxt.setText(nombres);
+            apellidostxt.setText(apellidos);
+            cargotxt.setText(cargo);
+            turnotxt.setText(turno);
+            entradatxt.setText(entrada);
+
+            // Obtener la hora actual de entrada
+            LocalTime horaEntrada = LocalTime.now();
+            turnotxt.setText(horaEntrada.toString());
+
+            // Verificar si el empleado llegó a tiempo
+            LocalTime horaLimite = LocalTime.parse(entrada);
+            boolean llegoATiempo = !horaEntrada.isAfter(horaLimite);
+            String estadoPuntualidad = llegoATiempo ? "Puntual" : "Tarde";
+
+            // Registrar la entrada en la base de datos
+            String sqlRegistro = "INSERT INTO entrada (Cedula, Nombres, Apellidos, Fecha, Hora, Puntualidad) VALUES (?, ?, ?, CURRENT_DATE(), CURRENT_TIME(), ?)";
+            PreparedStatement psRegistro = conexion.prepareStatement(sqlRegistro);
+            psRegistro.setString(1, cedula);
+            psRegistro.setString(2, nombres);
+            psRegistro.setString(3, apellidos);
+            psRegistro.setString(4, estadoPuntualidad);
+            psRegistro.executeUpdate();
+
+            // Mostrar mensaje de llegada
+            String mensaje = llegoATiempo ? "El empleado llegó a tiempo." : "El empleado no llegó a tiempo.";
+            JOptionPane.showMessageDialog(this, mensaje, "Registro de Entrada", JOptionPane.INFORMATION_MESSAGE);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Empleado no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        Connection conexion = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al registrar la entrada:\n" + e.getMessage(), "Error en la operación", JOptionPane.ERROR_MESSAGE);
+    } finally {
         try {
-            conexion = new Conexion().conectar(); // Asegúrate de que este método esté bien definido
-            String sqlEmpleado = "SELECT Cedula, Nombres, Apellidos, Cargo, Turno, Entrada FROM empleados WHERE Cedula = ?";
-            ps = conexion.prepareStatement(sqlEmpleado);
-            ps.setString(1, cedula);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                cedula = rs.getString("Cedula");
-                String nombres = rs.getString("Nombres");
-                String apellidos = rs.getString("Apellidos");
-                String cargo = rs.getString("Cargo");
-                String turno = rs.getString("Turno");
-                String entrada = rs.getString("Entrada");
-                
-                
-                cedulatxt.setText(cedula);
-                nombretxt.setText(nombres);
-                apellidostxt.setText(apellidos);
-                cargotxt.setText(cargo);
-                turnotxt.setText(turno);
-                entradatxt.setText(entrada);
-
-                // Obtener la hora actual de entrada
-                LocalTime horaEntrada = LocalTime.now();
-                turnotxt.setText(horaEntrada.toString());
-
-                // Verificar si el empleado llegó a tiempo
-                LocalTime horaLimite = LocalTime.parse(entrada);
-                boolean llegoATiempo = !horaEntrada.isAfter(horaLimite);
-
-                // Registrar la entrada en la base de datos
-                String sqlRegistro = "INSERT INTO entrada (Cedula, Nombres, Apellidos, Fecha, Hora) VALUES (?, ?, ?, CURRENT_DATE(), CURRENT_TIME())";
-                PreparedStatement psRegistro = conexion.prepareStatement(sqlRegistro);
-                psRegistro.setString(1, cedula);
-                psRegistro.setString(2, nombres);
-                psRegistro.setString(3, apellidos);
-                psRegistro.executeUpdate();
-
-                // Mostrar mensaje de llegada
-                String mensaje = llegoATiempo ? "El empleado llegó a tiempo." : "El empleado no llegó a tiempo.";
-                JOptionPane.showMessageDialog(this, mensaje, "Registro de Entrada", JOptionPane.INFORMATION_MESSAGE);
-
-            } else {
-                JOptionPane.showMessageDialog(this, "Empleado no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (conexion != null) conexion.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error al registrar la entrada:\n" + e.getMessage(), "Error en la operación", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (ps != null) ps.close();
-                if (conexion != null) conexion.close();
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Error al cerrar la conexión:\n" + e.getMessage(), "Error en la operación", JOptionPane.ERROR_MESSAGE);
-            }
+            JOptionPane.showMessageDialog(this, "Error al cerrar la conexión:\n" + e.getMessage(), "Error en la operación", JOptionPane.ERROR_MESSAGE);
         }
     }
+}
+
 
     
     @SuppressWarnings("unchecked")
@@ -169,7 +172,7 @@ public class Entrada extends javax.swing.JPanel {
 
         cedulalbl.setText("Cédula");
 
-        jornadalbl.setText("Turno");
+        jornadalbl.setText("Hora registrada");
 
         entradalbl.setText("Hora de entrada");
 

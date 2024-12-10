@@ -59,7 +59,7 @@ public class Salida extends javax.swing.JPanel {
         }
     }
     
-    private void registrarSalida() {
+   private void registrarSalida() {
     String cedula = ingresarCedula.getText().trim();
 
     if (cedula.isEmpty()) {
@@ -100,18 +100,20 @@ public class Salida extends javax.swing.JPanel {
 
             // Verificar si el empleado salió a tiempo
             LocalTime horaLimite = LocalTime.parse(salida);
-            boolean salioATiempo = !horaSalida.isAfter(horaLimite);
+            boolean salioTemprano = horaSalida.isBefore(horaLimite);
+            String estadoPuntualidad = salioTemprano ? "Temprano" : "Puntual";
 
             // Registrar la salida en la base de datos
-            String sqlRegistro = "INSERT INTO salida (Cedula, Nombres, Apellidos, Fecha, Hora) VALUES (?, ?, ?, CURRENT_DATE(), CURRENT_TIME())";
+            String sqlRegistro = "INSERT INTO salida (Cedula, Nombres, Apellidos, Fecha, Hora, Puntualidad) VALUES (?, ?, ?, CURRENT_DATE(), CURRENT_TIME(), ?)";
             PreparedStatement psRegistro = conexion.prepareStatement(sqlRegistro);
             psRegistro.setString(1, cedula);
             psRegistro.setString(2, nombres);
             psRegistro.setString(3, apellidos);
+            psRegistro.setString(4, estadoPuntualidad);
             psRegistro.executeUpdate();
 
             // Mostrar mensaje de salida
-            String mensaje = salioATiempo ? "El empleado salió a tiempo." : "El empleado no salió a tiempo.";
+            String mensaje = salioTemprano ? "El empleado salió temprano." : "El empleado salió puntual.";
             JOptionPane.showMessageDialog(this, mensaje, "Registro de Salida", JOptionPane.INFORMATION_MESSAGE);
 
         } else {
@@ -130,6 +132,8 @@ public class Salida extends javax.swing.JPanel {
         }
     }
 }
+
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -170,7 +174,7 @@ public class Salida extends javax.swing.JPanel {
 
         jornadalbl.setText("Cargo");
 
-        salidalbl.setText("Turno");
+        salidalbl.setText("Hora registrada");
 
         idlbl.setText("Hora de salida");
 
