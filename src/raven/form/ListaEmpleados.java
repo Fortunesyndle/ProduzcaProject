@@ -517,10 +517,10 @@ private void eliminarEmpleado() {
                 .addGap(14, 14, 14))
         );
 
-        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 200, 1160, -1));
+        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 1160, -1));
 
         busqueda_field.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 204), 2, true));
-        add(busqueda_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 610, 30));
+        add(busqueda_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 610, 30));
 
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -538,7 +538,7 @@ private void eliminarEmpleado() {
                 modificarbtnActionPerformed(evt);
             }
         });
-        add(modificarbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, -1, -1));
+        add(modificarbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, -1, -1));
 
         eliminarbtn.setBackground(new java.awt.Color(0, 0, 153));
         eliminarbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -549,7 +549,7 @@ private void eliminarEmpleado() {
                 eliminarbtnActionPerformed(evt);
             }
         });
-        add(eliminarbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 140, -1, -1));
+        add(eliminarbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 140, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 102));
 
@@ -562,19 +562,18 @@ private void eliminarEmpleado() {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(489, Short.MAX_VALUE)
+                .addContainerGap(565, Short.MAX_VALUE)
                 .addComponent(lb)
-                .addGap(477, 477, 477))
+                .addGap(521, 521, 521))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lb, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(lb, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 1150, 50));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1270, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
