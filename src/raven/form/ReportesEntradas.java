@@ -7,11 +7,13 @@ import com.raven.swing.ScrollBar;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -24,6 +26,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import raven.conexion.Conexion;
+
 
 public class ReportesEntradas extends javax.swing.JPanel {
 
@@ -40,63 +43,29 @@ public class ReportesEntradas extends javax.swing.JPanel {
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
         
-        busqueda_field.addActionListener(e -> buscarDatos(busqueda_field.getText()));
+        busqueda_field.addActionListener(e -> buscarRegistros(busqueda_field.getText()));
         
         busqueda_field.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                buscarDatos(busqueda_field.getText());
+                buscarRegistros(busqueda_field.getText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                buscarDatos(busqueda_field.getText());
+                buscarRegistros(busqueda_field.getText());
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                buscarDatos(busqueda_field.getText());
+                buscarRegistros(busqueda_field.getText());
             }
         });
+        
        
     }
     
-    private void buscarDatos(String query) {
-        try {
-            Connection conexion = new Conexion().conectar(); // Asegúrate de que este método esté bien definido
-            String sql = "SELECT * FROM tesis WHERE ID_Tesis LIKE ? OR Especialidad LIKE ? OR Cedula LIKE ? OR Enumeracion LIKE ?"; 
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            
-            ps.setString(1, "%" + query + "%");
-            ps.setString(2, "%" + query + "%");
-            ps.setString(3, "%" + query + "%");
-            ps.setString(4, "%" + query + "%");
-            
-            ResultSet rs = ps.executeQuery();
-            
-            ResultSetMetaData rsmd = rs.getMetaData();
-            String[] titulos = {"ID", "Titulo", "Autor", "Cedula", "Fecha", "Especialidad", "Enumeracion"};
-            
-            DefaultTableModel modelo = new DefaultTableModel(null, titulos);
-            
-            while (rs.next()) {
-                Object[] fila = new Object[rsmd.getColumnCount()];
-                fila[0] = rs.getInt("ID_Tesis"); 
-                fila[1] = rs.getString("Titulo");
-                fila[2] = rs.getString("Autor");
-                fila[3] = rs.getString("Cedula");
-                fila[4] = rs.getString("Fecha");
-                fila[5] = rs.getString("Especialidad");
-                fila[6] = rs.getString("Enumeracion");
-                modelo.addRow(fila); 
-            }
-
-            table.setModel(modelo); 
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al intentar buscar:\n" + e, "Error en la operación", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+    
     
     public void mostrarTabla() {
     String sql = "SELECT Cedula, Nombres, Apellidos, Fecha, Hora, Puntualidad FROM entrada";
@@ -160,271 +129,50 @@ public class ReportesEntradas extends javax.swing.JPanel {
         }
     }
     
-    private void agregarTesis() { 
-        
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-        // Crear los componentes del formulario
-        JLabel tituloLabel = new JLabel("Titulo:");
-        JTextField tituloField = new JTextField(8);
-        JLabel autorLabel = new JLabel("Autor:");
-        JTextField autorField = new JTextField(8);
-        JLabel cedulaLabel = new JLabel("Cedula:");
-        JTextField cedulaField = new JTextField(8);
-        JLabel fechaLabel = new JLabel("Fecha:");
-        JTextField fechaField = new JTextField(8);
-        JLabel especialidadLabel = new JLabel("Especialidad:");
-        JTextField especialidadField = new JTextField(8);
-        JLabel enumeracionLabel = new JLabel("Enumeracion:");
-        JTextField enumeracionField = new JTextField(8);
-
-        // Añadir los componentes al panel
-        panel.add(tituloLabel);
-        panel.add(tituloField);
-        panel.add(autorLabel);
-        panel.add(autorField);
-        panel.add(cedulaLabel);
-        panel.add(cedulaField);
-        panel.add(fechaLabel);
-        panel.add(fechaField);
-        panel.add(especialidadLabel);
-        panel.add(especialidadField);
-        panel.add(enumeracionLabel);
-        panel.add(enumeracionField);
-       
-                
-
-        JOptionPane.showConfirmDialog(null, panel, "Agregar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-
-        try {
-            if (tituloField.getText().isBlank() || autorField.getText().isBlank() || cedulaField.getText().isBlank() || fechaField.getText().isBlank() || especialidadField.getText().isBlank()
-                    ) {
-                JOptionPane.showMessageDialog(null, "Faltan campos por llenar", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-
-                   Conexion cn = new Conexion();
-                   Connection conexion = cn.conectar();
-                   Statement st = conexion.createStatement();
-
-                String Titulo, Autor, Cedula, Fecha, Enumeracion, Especialidad,  Resumen;
-
-                Titulo = texto(tituloField);
-                Autor = texto(autorField);
-                Cedula = texto(cedulaField);
-                Fecha = texto(fechaField);
-                Especialidad = texto(especialidadField);
-                Enumeracion = texto(enumeracionField);
-                
-
-                String sqla2 = "insert into Tesis (Titulo, Autor, Cedula, Fecha, Especialidad, Enumeracion) values (?,?,?,?,?,?)";
-
-                PreparedStatement ps2 = conexion.prepareStatement(sqla2);
-
-              
-                ps2.setString(1, Titulo);
-                ps2.setString(2, Autor);
-                ps2.setString(3, Cedula);
-                ps2.setString(4, Fecha);
-                ps2.setString(5, Especialidad);
-                ps2.setString(6, Enumeracion);
-
-                ps2.executeUpdate();
-
-                JOptionPane.showMessageDialog(null, "Registro realizado", "EXITO", JOptionPane.INFORMATION_MESSAGE);
-
-                blank(tituloField);
-                blank(autorField);
-                blank(cedulaField);
-                blank(fechaField);
-                blank(especialidadField);
-                blank(enumeracionField);
-
-            }
-        } catch (HeadlessException | NumberFormatException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        
-        }
-    }
-    
-    private void modificarTesis() {
-        int selectedRow = table.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Selecciona un registro primero.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Obtener los datos del registro seleccionado
-        String id = (String) table.getValueAt(selectedRow, 0);
-        String titulo = (String) table.getValueAt(selectedRow, 1);
-        String autor = (String) table.getValueAt(selectedRow, 2);
-        String cedula = (String) table.getValueAt(selectedRow, 3);
-        String fecha = (String) table.getValueAt(selectedRow, 4);
-        String especialidad = (String) table.getValueAt(selectedRow, 5);
-        String enumeracion = (String) table.getValueAt(selectedRow, 6);
-
-        // Panel del formulario para modificar
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-        // Crear los componentes del formulario
-        JLabel idLabel = new JLabel("ID:");
-        JTextField idField = new JTextField(id, 8);
-        JLabel tituloLabel = new JLabel("Titulo:");
-        JTextField tituloField = new JTextField(titulo, 8);
-        JLabel autorLabel = new JLabel("Autor:");
-        JTextField autorField = new JTextField(autor, 8);
-        JLabel cedulaLabel = new JLabel("Cedula:");
-        JTextField cedulaField = new JTextField(cedula, 8);
-        JLabel fechaLabel = new JLabel("Fecha:");
-        JTextField fechaField = new JTextField(fecha, 8);
-        JLabel especialidadLabel = new JLabel("Especialidad:");
-        JTextField especialidadField = new JTextField(especialidad, 8);
-        JLabel enumeracionLabel = new JLabel("Enumeracion:");
-        JTextField enumeracionField = new JTextField(enumeracion, 8);
-
-        // Añadir los componentes al panel
-        panel.add(idLabel);
-        panel.add(idField);
-        panel.add(tituloLabel);
-        panel.add(tituloField);
-        panel.add(autorLabel);
-        panel.add(autorField);
-        panel.add(cedulaLabel);
-        panel.add(cedulaField);
-        panel.add(fechaLabel);
-        panel.add(fechaField);
-        panel.add(especialidadLabel);
-        panel.add(especialidadField);
-        panel.add(enumeracionLabel);
-        panel.add(enumeracionField);
-
-        int result = JOptionPane.showConfirmDialog(null, panel, "Modificar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-        
-        if (result == JOptionPane.OK_OPTION) {
-            try {
-                if (tituloField.getText().isBlank() || autorField.getText().isBlank() || cedulaField.getText().isBlank() || fechaField.getText().isBlank() || especialidadField.getText().isBlank()) {
-                    JOptionPane.showMessageDialog(null, "Faltan campos por llenar", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    // Conectar a la base de datos y actualizar el registro
-                    Conexion cn = new Conexion();
-                    Connection conexion = cn.conectar();
-                    String sql = "UPDATE Tesis SET Titulo = ?, Autor = ?, Cedula = ?, Fecha = ?, Especialidad = ?, Enumeracion = ? WHERE ID_Tesis = ?";
-                    PreparedStatement ps2 = conexion.prepareStatement(sql);
-
-                    ps2.setString(1, tituloField.getText());
-                    ps2.setString(2, autorField.getText());
-                    ps2.setString(3, cedulaField.getText());
-                    ps2.setString(4, fechaField.getText());
-                    ps2.setString(5, especialidadField.getText());
-                    ps2.setString(6, enumeracionField.getText());
-                    ps2.setInt(7, Integer.parseInt(idField.getText()));
-
-                    int rowsAffected = ps2.executeUpdate();
-
-                    if (rowsAffected > 0) {
-                        JOptionPane.showMessageDialog(null, "Registro actualizado", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
-                        table.setValueAt(tituloField.getText(), selectedRow, 1);
-                        table.setValueAt(autorField.getText(), selectedRow, 2);
-                        table.setValueAt(cedulaField.getText(), selectedRow, 3);
-                        table.setValueAt(fechaField.getText(), selectedRow, 4);
-                        table.setValueAt(especialidadField.getText(), selectedRow, 5);
-                        table.setValueAt(enumeracionField.getText(), selectedRow, 6);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se encontró el registro con ID: " + idField.getText(), "Advertencia", JOptionPane.WARNING_MESSAGE);
-                    }
-                }
-            } catch (HeadlessException | NumberFormatException | SQLException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-            }
-        }
-    }
-
-
-    
-    public static boolean eliminar(String id) {
-    Conexion cn = new Conexion();
-    PreparedStatement ps = null;
-    Connection conexion = cn.conectar(); // Asegúrate de obtener la conexión
-
-    String sql = "DELETE FROM tesis WHERE ID_Tesis = ?"; // Usa un parámetro en la consulta SQL
-
+    private void buscarRegistros(String query) {
     try {
-        ps = conexion.prepareStatement(sql); // Corrección: Sin comillas dobles
-        ps.setString(1, id); // Establece el valor del parámetro
-        ps.executeUpdate(); // Usa executeUpdate para operaciones de modificación
-
+        Connection conexion = new Conexion().conectar(); // Asegúrate de que este método esté bien definido
+        String sql = "SELECT Cedula, Nombres, Apellidos, Fecha, Hora, Puntualidad FROM entrada WHERE Cedula LIKE ? OR Nombres LIKE ? OR Apellidos LIKE ? OR Puntualidad LIKE ?";
+        PreparedStatement ps = conexion.prepareStatement(sql);
         
-        return true;
-    } catch (Exception e) {
-        System.out.println(e.toString());
-        return false;
-    } finally {
-        try {
-            if (ps != null) {
-                ps.close();
-            }
-            if (conexion != null) {
-                conexion.close();
-            }
-        } catch (SQLException e) {
-            System.out.println(e.toString());
+        ps.setString(1, "%" + query + "%");
+        ps.setString(2, "%" + query + "%");
+        ps.setString(3, "%" + query + "%");
+        ps.setString(4, "%" + query + "%");
+        
+        ResultSet rs = ps.executeQuery();
+        
+        String[] titulos = {"Cedula", "Nombres", "Apellidos", "Fecha", "Hora", "Puntualidad"};
+        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
+        
+        while (rs.next()) {
+            Object[] fila = new Object[6];
+            fila[0] = rs.getString("Cedula");
+            fila[1] = rs.getString("Nombres");
+            fila[2] = rs.getString("Apellidos");
+            fila[3] = rs.getDate("Fecha");
+            fila[4] = rs.getTime("Hora");
+            fila[5] = rs.getString("Puntualidad");
+            modelo.addRow(fila);
         }
+
+        table.setModel(modelo);
+        
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error al intentar buscar:\n" + e, "Error en la operación", JOptionPane.ERROR_MESSAGE);
     }
 }
+
+
    
-     private void eliminarTesis(){
-         
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-        // Crear los componentes del formulario
-        JLabel mensaje = new JLabel ("Ingrese el ID del registro que desea eliminar");
-        JLabel tituloLabel = new JLabel("ID:");
-        JTextField tituloField = new JTextField(8);
-        panel.add(mensaje);
-        panel.add(tituloLabel);
-        panel.add(tituloField);
-        int result = JOptionPane.showConfirmDialog(null, panel, "Eliminar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-        
-        if (result == JOptionPane.OK_OPTION) {
-            try {
-                if (tituloField.getText().isBlank()) {
-                    JOptionPane.showMessageDialog(null, "El campo ID está vacío", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    Conexion cn = new Conexion();
-                    Connection conexion = cn.conectar();
-
-                    String Titulo = tituloField.getText();
-
-                    String sql = "DELETE FROM Tesis WHERE ID_Tesis = ?";
-
-                    PreparedStatement ps = conexion.prepareStatement(sql);
-                    ps.setString(1, Titulo);
-
-                    int rowsAffected = ps.executeUpdate();
-                    if (rowsAffected > 0) {
-                        JOptionPane.showMessageDialog(null, "Registro eliminado", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se encontró un registro con ese título", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-
-                    // Limpiar el campo después de la eliminación exitosa
-                    tituloField.setText("");
-
-                    // Cerrar la conexión
-                    conexion.close();
-                }
-            } catch (HeadlessException | SQLException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-            }
-     }
-     }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
+        rSDateChooserBeanInfo1 = new rojeru_san.componentes.RSDateChooserBeanInfo();
         panel = new javax.swing.JLayeredPane();
         panel1 = new javax.swing.JLayeredPane();
         panelBorder1 = new com.raven.swing.PanelBorder();
@@ -434,6 +182,8 @@ public class ReportesEntradas extends javax.swing.JPanel {
         busqueda_field = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         lb = new javax.swing.JLabel();
+        puntualidadComboBox = new javax.swing.JComboBox<>();
+        fecha_field = new rojeru_san.componentes.RSDateChooser();
 
         jLabel2.setText("jLabel2");
 
@@ -498,6 +248,9 @@ public class ReportesEntradas extends javax.swing.JPanel {
 
         lb.setText("Reporte de entradas");
 
+        puntualidadComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Puntual", "Tarde", " " }));
+        puntualidadComboBox.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -506,17 +259,20 @@ public class ReportesEntradas extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 1130, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(350, 350, 350)
-                        .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)
+                        .addComponent(puntualidadComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(476, 476, 476)
                         .addComponent(lb)))
-                .addGap(0, 356, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addComponent(fecha_field, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(333, 333, 333))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(20, 20, 20)
@@ -535,11 +291,16 @@ public class ReportesEntradas extends javax.swing.JPanel {
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lb)
-                .addGap(33, 33, 33)
-                .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(395, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(fecha_field, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(busqueda_field)
+                        .addComponent(puntualidadComboBox))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(398, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -555,13 +316,13 @@ public class ReportesEntradas extends javax.swing.JPanel {
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
-         agregarTesis();
-        mostrarTabla();
+        
     }//GEN-LAST:event_jLabel6MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField busqueda_field;
+    private rojeru_san.componentes.RSDateChooser fecha_field;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
@@ -569,6 +330,8 @@ public class ReportesEntradas extends javax.swing.JPanel {
     private javax.swing.JLayeredPane panel;
     private javax.swing.JLayeredPane panel1;
     private com.raven.swing.PanelBorder panelBorder1;
+    private javax.swing.JComboBox<String> puntualidadComboBox;
+    private rojeru_san.componentes.RSDateChooserBeanInfo rSDateChooserBeanInfo1;
     private javax.swing.JScrollPane spTable;
     private com.raven.swing.Table table;
     // End of variables declaration//GEN-END:variables
