@@ -56,13 +56,14 @@ public class RegistroEmpleados extends javax.swing.JPanel {
                 + "arc:30;");
          emailField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
-         trabajoField.putClientProperty(FlatClientProperties.STYLE, ""
+         entradaField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
          generoField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
          jButton3.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30;");
-         
+         salidaField.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:30;");
     }
     
     
@@ -77,11 +78,12 @@ public class RegistroEmpleados extends javax.swing.JPanel {
         String telefono = telefonoField.getText().trim();
         String email = emailField.getText().trim();
         String cargo = cargoField.getText().trim();
-        String horario = turnoField.getText().trim();
+        String entrada = entradaField.getText().trim();
+        String salida = salidaField.getText().trim();
 
         // Validar que todos los campos estén llenos
         if (cedula.isEmpty() || nombres.isEmpty() || apellidos.isEmpty() || edad.isEmpty() || genero.isEmpty() || direccion.isEmpty() ||
-            turno.isEmpty() || telefono.isEmpty() || email.isEmpty() || cargo.isEmpty() || horario.isEmpty()) {
+            turno.isEmpty() || telefono.isEmpty() || email.isEmpty() || cargo.isEmpty() || entrada.isEmpty() || salida.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, llena todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -92,7 +94,7 @@ public class RegistroEmpleados extends javax.swing.JPanel {
 
         try {
             conexion = new Conexion().conectar(); // Asegúrate de que este método esté bien definido
-            String sql = "INSERT INTO empleados (Cedula, Nombres, Apellidos, Edad, Genero, Direccion, Turno, Telefono, Email, Cargo, Horario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO empleados (Cedula, Nombres, Apellidos, Edad, Genero, Direccion, Turno, Telefono, Email, Cargo, Entrada, Salida) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             ps = conexion.prepareStatement(sql);
             ps.setInt(1, Integer.parseInt(cedula));
             ps.setString(2, nombres);
@@ -104,7 +106,8 @@ public class RegistroEmpleados extends javax.swing.JPanel {
             ps.setString(8, telefono);
             ps.setString(9, email);
             ps.setString(10, cargo);
-            ps.setString(11, horario);
+            ps.setString(11, entrada);
+            ps.setString(12, salida);
             ps.executeUpdate();
 
             JOptionPane.showMessageDialog(this, "Empleado registrado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
@@ -120,7 +123,9 @@ public class RegistroEmpleados extends javax.swing.JPanel {
             telefonoField.setText("");
             emailField.setText("");
             cargoField.setText("");
-            turnoField.setText("");
+            entradaField.setText("");
+            salidaField.setText("");
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error al registrar el empleado:\n" + e.getMessage(), "Error en la operación", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -160,7 +165,7 @@ public class RegistroEmpleados extends javax.swing.JPanel {
         panelBorder5 = new com.raven.swing.PanelBorder();
         jLabel16 = new javax.swing.JLabel();
         emailField = new javax.swing.JTextField();
-        trabajoField = new javax.swing.JTextField();
+        entradaField = new javax.swing.JTextField();
         cargoField = new javax.swing.JTextField();
         telefonoField = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
@@ -170,6 +175,8 @@ public class RegistroEmpleados extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
+        salidaField = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -344,7 +351,7 @@ public class RegistroEmpleados extends javax.swing.JPanel {
 
         jLabel20.setText("E-mail");
 
-        jLabel21.setText("Horario de trabajo");
+        jLabel21.setText("Hora de entrada");
 
         jButton3.setBackground(new java.awt.Color(20, 33, 100));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -363,14 +370,22 @@ public class RegistroEmpleados extends javax.swing.JPanel {
         jLabel24.setForeground(new java.awt.Color(127, 127, 127));
         jLabel24.setText("Información de contacto");
 
+        salidaField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salidaFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel22.setText("Hora de salida");
+
         javax.swing.GroupLayout panelBorder5Layout = new javax.swing.GroupLayout(panelBorder5);
         panelBorder5.setLayout(panelBorder5Layout);
         panelBorder5Layout.setHorizontalGroup(
             panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder5Layout.createSequentialGroup()
+                    .addGroup(panelBorder5Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
                         .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel20)
@@ -378,24 +393,43 @@ public class RegistroEmpleados extends javax.swing.JPanel {
                                 .addComponent(telefonoField)
                                 .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel24))
-                        .addGap(62, 62, 62)
                         .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(trabajoField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cargoField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel21)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel18))
-                        .addGap(109, 109, 109))
+                            .addGroup(panelBorder5Layout.createSequentialGroup()
+                                .addGap(62, 62, 62)
+                                .addComponent(jLabel16))
+                            .addGroup(panelBorder5Layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(entradaField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelBorder5Layout.createSequentialGroup()
+                                .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelBorder5Layout.createSequentialGroup()
+                                        .addGap(42, 42, 42)
+                                        .addComponent(cargoField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder5Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel21)
+                                        .addGap(124, 124, 124)))
+                                .addComponent(salidaField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelBorder5Layout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addComponent(jLabel18)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder5Layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(247, 247, 247)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelBorder5Layout.createSequentialGroup()
+                                .addGap(225, 225, 225)
+                                .addComponent(jLabel22)))
+                        .addGap(120, 120, 120)))
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
         panelBorder5Layout.setVerticalGroup(
             panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder5Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(36, 36, 36)
                 .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(jLabel24))
@@ -403,18 +437,25 @@ public class RegistroEmpleados extends javax.swing.JPanel {
                 .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(telefonoField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cargoField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel21))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(trabajoField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelBorder5Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(telefonoField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cargoField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel21)))
+                    .addGroup(panelBorder5Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(salidaField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(entradaField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64))
@@ -439,7 +480,7 @@ public class RegistroEmpleados extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(panelBorder3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(panelBorder5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -490,6 +531,10 @@ public class RegistroEmpleados extends javax.swing.JPanel {
         registrarEmpleado();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void salidaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salidaFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidosField;
@@ -498,6 +543,7 @@ public class RegistroEmpleados extends javax.swing.JPanel {
     private javax.swing.JTextField direccionField;
     private javax.swing.JTextField edadField;
     private javax.swing.JTextField emailField;
+    private javax.swing.JTextField entradaField;
     private javax.swing.JTextField generoField;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel16;
@@ -507,6 +553,7 @@ public class RegistroEmpleados extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
@@ -517,8 +564,8 @@ public class RegistroEmpleados extends javax.swing.JPanel {
     private com.raven.swing.PanelBorder panel1;
     private com.raven.swing.PanelBorder panelBorder3;
     private com.raven.swing.PanelBorder panelBorder5;
+    private javax.swing.JTextField salidaField;
     private javax.swing.JTextField telefonoField;
-    private javax.swing.JTextField trabajoField;
     private javax.swing.JTextField turnoField;
     // End of variables declaration//GEN-END:variables
 }

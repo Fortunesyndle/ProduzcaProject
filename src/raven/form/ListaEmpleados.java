@@ -119,7 +119,9 @@ public class ListaEmpleados extends javax.swing.JPanel {
         model.addColumn("Telefono");
         model.addColumn("Email");
         model.addColumn("Cargo");
-        model.addColumn("Horario");
+        model.addColumn("H. Entrada");
+        model.addColumn("H. Salida");
+        
        
 
         table.setModel(model);
@@ -141,6 +143,7 @@ public class ListaEmpleados extends javax.swing.JPanel {
                 datos.add(rs.getString(9));
                 datos.add(rs.getString(10));
                 datos.add(rs.getString(11));
+                datos.add(rs.getString(12));
 
                 // Convierte el ArrayList a un array y luego agrega la fila al modelo
                 model.addRow(datos.toArray(new String[0]));
@@ -280,7 +283,8 @@ public class ListaEmpleados extends javax.swing.JPanel {
     String telefono = (String) table.getValueAt(selectedRow, 7);
     String email = (String) table.getValueAt(selectedRow, 8);
     String cargo = (String) table.getValueAt(selectedRow, 9);
-    String horario = (String) table.getValueAt(selectedRow, 10);
+    String entrada = (String) table.getValueAt(selectedRow, 10);
+    String salida = (String) table.getValueAt(selectedRow, 11);
 
     // Convertir cedula y edad a int
     int cedula, edad;
@@ -303,12 +307,13 @@ public class ListaEmpleados extends javax.swing.JPanel {
         new JTextField(telefono),
         new JTextField(email),
         new JTextField(cargo),
-        new JTextField(horario)
+        new JTextField(entrada),
+        new JTextField(salida)
     };
 
     // Crear panel para el diálogo
-    JPanel panel = new JPanel(new GridLayout(11, 2));
-    String[] labels = {"Nombres:", "Apellidos:", "Edad:", "Género:", "Dirección:", "Turno:", "Teléfono:", "Email:", "Cargo:", "Horario:"};
+    JPanel panel = new JPanel(new GridLayout(12, 2));
+    String[] labels = {"Nombres:", "Apellidos:", "Edad:", "Género:", "Dirección:", "Turno:", "Teléfono:", "Email:", "Cargo:", "H.Entrada:", "H.Salida"};
     
     for (int i = 0; i < labels.length; i++) {
         panel.add(new JLabel(labels[i]));
@@ -320,7 +325,7 @@ public class ListaEmpleados extends javax.swing.JPanel {
     
     if (result == JOptionPane.OK_OPTION) {
         try (Connection conexion = new Conexion().conectar(); 
-             PreparedStatement ps = conexion.prepareStatement("UPDATE empleados SET Nombres = ?, Apellidos = ?, Edad = ?, Genero = ?, Direccion = ?, Turno = ?, Telefono = ?, Email = ?, Cargo = ?, Horario = ? WHERE Cedula = ?")) {
+             PreparedStatement ps = conexion.prepareStatement("UPDATE empleados SET Nombres = ?, Apellidos = ?, Edad = ?, Genero = ?, Direccion = ?, Turno = ?, Telefono = ?, Email = ?, Cargo = ?, Entrada = ?, Salida = ? WHERE Cedula = ?")) {
 
             // Asignar valores a la consulta
             ps.setString(1, fields[0].getText());
@@ -333,7 +338,8 @@ public class ListaEmpleados extends javax.swing.JPanel {
             ps.setString(8, fields[7].getText());
             ps.setString(9, fields[8].getText());
             ps.setString(10, fields[9].getText());
-            ps.setInt(11, cedula);
+            ps.setString(11, fields[10].getText());
+            ps.setInt(12, cedula);
 
             // Ejecutar actualización
             ps.executeUpdate();
@@ -349,6 +355,7 @@ public class ListaEmpleados extends javax.swing.JPanel {
             table.setValueAt(fields[7].getText(), selectedRow, 8);
             table.setValueAt(fields[8].getText(), selectedRow, 9);
             table.setValueAt(fields[9].getText(), selectedRow, 10);
+            table.setValueAt(fields[10].getText(), selectedRow, 11);
 
             JOptionPane.showMessageDialog(this, "Empleado modificado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
