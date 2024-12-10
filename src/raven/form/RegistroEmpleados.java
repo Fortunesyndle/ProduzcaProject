@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import raven.application.Application;
 import raven.conexion.Conexion;
 
 /**
@@ -529,6 +530,7 @@ public class RegistroEmpleados extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         registrarEmpleado();
+        Application.showForm(this);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void salidaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaFieldActionPerformed
