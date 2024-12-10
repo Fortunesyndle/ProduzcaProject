@@ -42,63 +42,71 @@ public class ListaEmpleados extends javax.swing.JPanel {
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
         
-        busqueda_field.addActionListener(e -> buscarDatos(busqueda_field.getText()));
+        busqueda_field.addActionListener(e -> buscarRegistros(busqueda_field.getText()));
         
         busqueda_field.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                buscarDatos(busqueda_field.getText());
+                buscarRegistros(busqueda_field.getText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                buscarDatos(busqueda_field.getText());
+                buscarRegistros(busqueda_field.getText());
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                buscarDatos(busqueda_field.getText());
+                buscarRegistros(busqueda_field.getText());
             }
         });
        
     }
     
-    private void buscarDatos(String query) {
-        try {
-            Connection conexion = new Conexion().conectar(); // Asegúrate de que este método esté bien definido
-            String sql = "SELECT * FROM tesis WHERE ID_Tesis LIKE ? OR Especialidad LIKE ? OR Cedula LIKE ? OR Enumeracion LIKE ?"; 
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            
-            ps.setString(1, "%" + query + "%");
-            ps.setString(2, "%" + query + "%");
-            ps.setString(3, "%" + query + "%");
-            ps.setString(4, "%" + query + "%");
-            
-            ResultSet rs = ps.executeQuery();
-            
-            ResultSetMetaData rsmd = rs.getMetaData();
-            String[] titulos = {"ID", "Titulo", "Autor", "Cedula", "Fecha", "Especialidad", "Enumeracion"};
-            
-            DefaultTableModel modelo = new DefaultTableModel(null, titulos);
-            
-            while (rs.next()) {
-                Object[] fila = new Object[rsmd.getColumnCount()];
-                fila[0] = rs.getInt("ID_Tesis"); 
-                fila[1] = rs.getString("Titulo");
-                fila[2] = rs.getString("Autor");
-                fila[3] = rs.getString("Cedula");
-                fila[4] = rs.getString("Fecha");
-                fila[5] = rs.getString("Especialidad");
-                fila[6] = rs.getString("Enumeracion");
-                modelo.addRow(fila); 
-            }
-
-            table.setModel(modelo); 
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al intentar buscar:\n" + e, "Error en la operación", JOptionPane.ERROR_MESSAGE);
+    
+    private void buscarRegistros(String query) {
+    try {
+        Connection conexion = new Conexion().conectar(); // Asegúrate de que este método esté bien definido
+        String sql = "SELECT Cedula, Nombres, Apellidos, Edad, Genero, Direccion, Turno, Telefono, Email, Cargo, Entrada, Salida "
+                   + "FROM empleados "
+                   + "WHERE Cedula LIKE ? OR Cargo LIKE ? OR Turno LIKE ?";
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        
+        ps.setString(1, "%" + query + "%");
+        ps.setString(2, "%" + query + "%");
+        ps.setString(3, "%" + query + "%");
+        
+        ResultSet rs = ps.executeQuery();
+        
+        String[] titulos = {"Cedula", "Nombres", "Apellidos", "Edad", "Genero", "Direccion", "Turno", "Telefono", "Email", "Cargo", "Entrada", "Salida"};
+        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
+        
+        while (rs.next()) {
+            Object[] fila = new Object[12];
+            fila[0] = rs.getString("Cedula");
+            fila[1] = rs.getString("Nombres");
+            fila[2] = rs.getString("Apellidos");
+            fila[3] = rs.getInt("Edad");
+            fila[4] = rs.getString("Genero");
+            fila[5] = rs.getString("Direccion");
+            fila[6] = rs.getString("Turno");
+            fila[7] = rs.getString("Telefono");
+            fila[8] = rs.getString("Email");
+            fila[9] = rs.getString("Cargo");
+            fila[10] = rs.getString("Entrada");
+            fila[11] = rs.getString("Salida");
+            modelo.addRow(fila);
         }
+
+        table.setModel(modelo);
+        
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error al intentar buscar:\n" + e, "Error en la operación", JOptionPane.ERROR_MESSAGE);
     }
+}
+
+    
+    
     
     public void mostrarTabla() {
         
