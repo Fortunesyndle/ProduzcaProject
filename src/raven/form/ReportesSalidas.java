@@ -100,13 +100,15 @@ public class ReportesSalidas extends javax.swing.JPanel {
     }
     
     public void mostrarTabla() {
-    String sql = "SELECT Cedula, Fecha, Hora FROM salida";
+    String sql = "SELECT Cedula, Nombres, Apellidos, Fecha, Hora FROM salida";
     Conexion cn = new Conexion();
     Connection conexion = cn.conectar();
 
     DefaultTableModel model = new DefaultTableModel();
 
     model.addColumn("Cedula");
+    model.addColumn("Nombres");
+    model.addColumn("Apellidos");
     model.addColumn("Fecha");
     model.addColumn("Hora");
 
@@ -119,6 +121,8 @@ public class ReportesSalidas extends javax.swing.JPanel {
         while (rs.next()) {
             ArrayList<String> datos = new ArrayList<>();
             datos.add(rs.getString("Cedula"));
+            datos.add(rs.getString("Nombres"));
+            datos.add(rs.getString("Apellidos"));
             datos.add(rs.getString("Fecha"));
             datos.add(rs.getString("Hora"));
 
