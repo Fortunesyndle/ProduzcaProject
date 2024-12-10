@@ -6,6 +6,8 @@ import com.raven.model.Model_Card;
 import com.raven.swing.ScrollBar;
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -14,6 +16,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -26,6 +29,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import raven.conexion.Conexion;
+import rojeru_san.componentes.RSDateChooser;
 
 
 public class ReportesEntradas extends javax.swing.JPanel {
@@ -62,8 +66,15 @@ public class ReportesEntradas extends javax.swing.JPanel {
             }
         });
         
-       
+        dateChooser = new RSDateChooser(); 
+        dateChooser.addPropertyChangeListener((PropertyChangeEvent evt) -> {
+        if ("date".equals(evt.getPropertyName())) { 
+        filtrarPorFecha(); 
+            }
+        });
+       puntualidadComboBox.addActionListener(e -> filtrarPorPuntualidad(puntualidadComboBox.getSelectedItem().toString()));
     }
+    
     
     
     
@@ -164,7 +175,117 @@ public class ReportesEntradas extends javax.swing.JPanel {
 }
 
 
-   
+     private void filtrarPorFecha() { 
+         if (dateChooser.getDatoFecha() != null) { 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+        String query = sdf.format(dateChooser.getDatoFecha()); buscarDatosPorFecha(query); 
+        } else { 
+         JOptionPane.showMessageDialog(this, "Selecciona una fecha válida.", "Error", JOptionPane.ERROR_MESSAGE); 
+         } 
+     }
+
+    private void buscarDatosPorFecha(String fecha) {
+    Connection conexion = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    try {
+        conexion = new Conexion().conectar(); // Asegúrate de que este método esté bien definido
+        String sql = "SELECT Cedula, Nombres, Apellidos, Fecha, Hora, Puntualidad FROM entrada WHERE DATE(Fecha) = DATE(?)";
+        ps = conexion.prepareStatement(sql);
+        ps.setString(1, fecha);
+
+        rs = ps.executeQuery();
+
+        String[] titulos = {"Cédula", "Nombres", "Apellidos", "Fecha", "Hora", "Puntualidad"};
+        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
+
+        while (rs.next()) {
+            Object[] fila = new Object[6];
+            fila[0] = rs.getString("Cedula");
+            fila[1] = rs.getString("Nombres");
+            fila[2] = rs.getString("Apellidos");
+            fila[3] = rs.getDate("Fecha");
+            fila[4] = rs.getTime("Hora");
+            fila[5] = rs.getString("Puntualidad");
+            modelo.addRow(fila);
+        }
+
+        table.setModel(modelo);
+
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "No se encontraron registros para la fecha seleccionada.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al intentar buscar:\n" + e.getMessage(), "Error en la operación", JOptionPane.ERROR_MESSAGE);
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (conexion != null) conexion.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al cerrar la conexión:\n" + e.getMessage(), "Error en la operación", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+
+    
+
+    private void filtrarPorPuntualidad(String puntualidad) {
+        buscarDatosPorPuntualidad(puntualidad);
+    }
+
+    private void buscarDatosPorPuntualidad(String puntualidad) {
+        Connection conexion = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conexion = new Conexion().conectar(); // Asegúrate de que este método esté bien definido
+            String sql = "SELECT Cedula, Nombres, Apellidos, Fecha, Hora, Puntualidad FROM entrada";
+
+            if (!puntualidad.equals("Todos")) {
+                sql += " WHERE Puntualidad = ?";
+                ps = conexion.prepareStatement(sql);
+                ps.setString(1, puntualidad);
+            } else {
+                ps = conexion.prepareStatement(sql);
+            }
+
+            rs = ps.executeQuery();
+
+            String[] titulos = {"Cédula", "Nombres", "Apellidos", "Fecha", "Hora", "Puntualidad"};
+            DefaultTableModel modelo = new DefaultTableModel(null, titulos);
+
+            while (rs.next()) {
+                Object[] fila = new Object[6];
+                fila[0] = rs.getString("Cedula");
+                fila[1] = rs.getString("Nombres");
+                fila[2] = rs.getString("Apellidos");
+                fila[3] = rs.getDate("Fecha");
+                fila[4] = rs.getTime("Hora");
+                fila[5] = rs.getString("Puntualidad");
+                modelo.addRow(fila);
+            }
+
+            table.setModel(modelo);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al intentar buscar:\n" + e.getMessage(), "Error en la operación", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (conexion != null) conexion.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error al cerrar la conexión:\n" + e.getMessage(), "Error en la operación", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+
+
     
     
     @SuppressWarnings("unchecked")
@@ -181,9 +302,8 @@ public class ReportesEntradas extends javax.swing.JPanel {
         spTable = new javax.swing.JScrollPane();
         table = new com.raven.swing.Table();
         busqueda_field = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         puntualidadComboBox = new javax.swing.JComboBox<>();
-        fecha_field = new rojeru_san.componentes.RSDateChooser();
+        dateChooser = new rojeru_san.componentes.RSDateChooser();
         jPanel1 = new javax.swing.JPanel();
         lb = new javax.swing.JLabel();
 
@@ -245,15 +365,17 @@ public class ReportesEntradas extends javax.swing.JPanel {
         busqueda_field.setText("  Cedula...");
         busqueda_field.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 255), 2, true));
 
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+        puntualidadComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "          ", "Puntual", "Tarde" }));
+        puntualidadComboBox.setToolTipText("");
+        puntualidadComboBox.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 204), 2, true));
+        puntualidadComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                puntualidadComboBoxActionPerformed(evt);
             }
         });
 
-        puntualidadComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Puntual", "Tarde", " " }));
-        puntualidadComboBox.setToolTipText("");
-        puntualidadComboBox.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 204), 2, true));
+        dateChooser.setFuente(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        dateChooser.setPlaceholder("Seleccionar Fecha");
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 102));
 
@@ -266,16 +388,16 @@ public class ReportesEntradas extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(461, 461, 461)
+                .addGap(472, 472, 472)
                 .addComponent(lb)
-                .addContainerGap(506, Short.MAX_VALUE))
+                .addContainerGap(521, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(lb)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -287,21 +409,19 @@ public class ReportesEntradas extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1128, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 1148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(620, 620, 620)
-                        .addComponent(fecha_field, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(480, 480, 480)
-                        .addComponent(puntualidadComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 1142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(250, 250, 250)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(400, 400, 400)
+                        .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(260, 260, 260)
+                        .addComponent(puntualidadComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,32 +435,29 @@ public class ReportesEntradas extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fecha_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(puntualidadComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(puntualidadComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
+                        .addGap(39, 39, 39)
                         .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
+                        .addGap(40, 40, 40)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+    private void puntualidadComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_puntualidadComboBoxActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jLabel6MouseClicked
+        filtrarPorPuntualidad(puntualidadComboBox.getSelectedItem().toString());
+    }//GEN-LAST:event_puntualidadComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField busqueda_field;
-    private rojeru_san.componentes.RSDateChooser fecha_field;
+    private rojeru_san.componentes.RSDateChooser dateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lb;
