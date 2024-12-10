@@ -463,9 +463,13 @@ private void eliminarEmpleado() {
 
         jLabel2.setText("jLabel2");
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         panel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
+        add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(674, 36, 498, -1));
 
         panel1.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
+        add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 6, 1132, -1));
 
         panelBorder1.setBackground(new java.awt.Color(0, 0, 102));
 
@@ -513,13 +517,17 @@ private void eliminarEmpleado() {
                 .addGap(14, 14, 14))
         );
 
+        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 200, 1160, -1));
+
         busqueda_field.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 204), 2, true));
+        add(busqueda_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 610, 30));
 
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
             }
         });
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 60, 102, 128));
 
         modificarbtn.setBackground(new java.awt.Color(0, 0, 153));
         modificarbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -530,6 +538,7 @@ private void eliminarEmpleado() {
                 modificarbtnActionPerformed(evt);
             }
         });
+        add(modificarbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, -1, -1));
 
         eliminarbtn.setBackground(new java.awt.Color(0, 0, 153));
         eliminarbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -540,6 +549,7 @@ private void eliminarEmpleado() {
                 eliminarbtnActionPerformed(evt);
             }
         });
+        add(eliminarbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 140, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 102));
 
@@ -564,58 +574,7 @@ private void eliminarEmpleado() {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1132, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(664, 664, 664)
-                        .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(154, 154, 154)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(modificarbtn)
-                        .addGap(65, 65, 65)
-                        .addComponent(eliminarbtn))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(modificarbtn)
-                            .addComponent(eliminarbtn))))
-                .addGap(12, 12, 12)
-                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 1150, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
