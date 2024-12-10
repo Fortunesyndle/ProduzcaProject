@@ -301,6 +301,7 @@ public class ReportesEntradas extends javax.swing.JPanel {
         panelBorder1 = new com.raven.swing.PanelBorder();
         spTable = new javax.swing.JScrollPane();
         table = new com.raven.swing.Table();
+        jLabel3 = new javax.swing.JLabel();
         busqueda_field = new javax.swing.JTextField();
         puntualidadComboBox = new javax.swing.JComboBox<>();
         dateChooser = new rojeru_san.componentes.RSDateChooser();
@@ -336,7 +337,7 @@ public class ReportesEntradas extends javax.swing.JPanel {
                 .addGap(17, 17, 17))
         );
 
-        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+        panelBorder1.setBackground(new java.awt.Color(0, 0, 102));
         panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         spTable.setBorder(null);
@@ -359,7 +360,12 @@ public class ReportesEntradas extends javax.swing.JPanel {
         });
         spTable.setViewportView(table);
 
-        panelBorder1.add(spTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 56, 1130, 393));
+        panelBorder1.add(spTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 56, 1150, 393));
+
+        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Entrada");
+        panelBorder1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
 
         busqueda_field.setForeground(new java.awt.Color(102, 102, 102));
         busqueda_field.setText("  Cedula...");
@@ -397,7 +403,7 @@ public class ReportesEntradas extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lb)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -432,7 +438,7 @@ public class ReportesEntradas extends javax.swing.JPanel {
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(busqueda_field, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -458,6 +464,7 @@ public class ReportesEntradas extends javax.swing.JPanel {
     private rojeru_san.componentes.RSDateChooser dateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lb;
